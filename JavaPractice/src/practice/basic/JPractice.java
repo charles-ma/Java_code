@@ -8,9 +8,13 @@ public class JPractice {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         JPractice p = new JPractice();
-        String s = "abc!";
+        String s = "abc";
         //assert p.isUniqueChar(s) : "the string does have duplicates.";
         assert p.isUniqueChar1(s) : "the string does have duplicates (by bitstring).";
+        int a = 2;
+        System.out.print(a++ + ++a);
+        int[][] s1 = new int[0][0];
+        System.out.print(s1.length);
     }
 
     public boolean isUniqueChar(String s) {
