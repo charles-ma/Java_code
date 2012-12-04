@@ -1,0 +1,171 @@
+2012-11-20 22:52:38,959 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-20 22:52:38,960 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-20 22:52:38,979 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-20 22:52:38,982 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-20 22:52:39,232 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-20 22:52:39,240 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-20 22:52:39,254 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-20 22:52:39,256 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-20 22:52:39,257 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-20 22:52:39,260 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-20 22:52:39,290 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-20 22:52:39,358 WARN  [org.eclim.plugin.adt.PluginResources] Android SDK Location not set.
+2012-11-20 23:09:57,207 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-20 23:09:57,245 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-20 23:09:57,275 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-20 23:09:57,276 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-20 23:09:57,277 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-20 23:09:57,277 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-11-20 23:32:08,439 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-20 23:32:08,440 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-20 23:32:08,510 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-20 23:32:08,530 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-20 23:32:08,842 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-20 23:32:08,845 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-20 23:32:08,851 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-20 23:32:08,853 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-20 23:32:08,863 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-20 23:32:08,864 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-20 23:32:08,865 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-20 23:54:06,115 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-20 23:54:06,119 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-20 23:54:06,122 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-20 23:54:06,123 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-20 23:54:06,124 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-20 23:54:06,126 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-11-29 23:04:03,397 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-29 23:04:03,422 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-29 23:04:03,499 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-29 23:04:03,514 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-29 23:04:03,948 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-29 23:04:03,962 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-29 23:04:03,964 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-29 23:04:03,966 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-29 23:04:03,968 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-29 23:04:03,968 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-29 23:04:03,969 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-29 23:09:45,657 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-29 23:09:45,660 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-29 23:09:45,662 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-29 23:09:45,663 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-29 23:09:45,664 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-29 23:09:45,678 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-11-29 23:47:04,114 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-29 23:47:04,119 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-29 23:47:04,154 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-29 23:47:04,168 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-29 23:47:04,423 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-29 23:47:04,430 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-29 23:47:04,431 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-29 23:47:04,433 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-29 23:47:04,434 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-29 23:47:04,434 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-29 23:47:04,435 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-29 23:50:33,297 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-29 23:50:33,300 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-29 23:50:33,302 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-29 23:50:33,302 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-29 23:50:33,305 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-29 23:50:33,326 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-11-29 23:54:58,470 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-29 23:54:58,471 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-29 23:54:58,513 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-29 23:54:58,517 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-29 23:54:58,685 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-29 23:54:58,689 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-29 23:54:58,691 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-29 23:54:58,694 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-29 23:54:58,696 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-29 23:54:58,697 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-29 23:54:58,698 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-29 23:58:27,622 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-29 23:58:27,627 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-29 23:58:27,629 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-29 23:58:27,631 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-29 23:58:27,632 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-29 23:58:27,642 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-11-30 09:14:22,078 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-30 09:14:22,079 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-30 09:14:22,094 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-30 09:14:22,098 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-30 09:14:22,445 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-30 09:14:22,449 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-30 09:14:22,450 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-30 09:14:22,451 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-30 09:14:22,453 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-30 09:14:22,453 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-30 09:14:22,454 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-30 09:20:08,615 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-30 09:20:08,618 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-30 09:20:08,619 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-30 09:20:08,620 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-30 09:20:08,622 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-30 09:20:08,623 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-11-30 09:20:50,320 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-11-30 09:20:50,321 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-11-30 09:20:50,337 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-11-30 09:20:50,342 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-11-30 09:20:50,484 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-11-30 09:20:50,489 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-11-30 09:20:50,495 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-11-30 09:20:50,502 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-11-30 09:20:50,504 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-11-30 09:20:50,505 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-11-30 09:20:50,505 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-11-30 09:39:25,504 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-11-30 09:39:25,507 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-11-30 09:39:25,508 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-11-30 09:39:25,508 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-11-30 09:39:25,509 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-11-30 09:39:25,510 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-12-02 08:26:43,746 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-12-02 08:26:43,764 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-12-02 08:26:43,806 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-12-02 08:26:43,811 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-12-02 08:26:44,269 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-12-02 08:26:44,274 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-12-02 08:26:44,275 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-12-02 08:26:44,277 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-12-02 08:26:44,279 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-12-02 08:26:44,279 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-12-02 08:26:44,280 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-12-02 08:32:01,339 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-12-02 08:32:01,341 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-12-02 08:32:01,343 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-12-02 08:32:01,343 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-12-02 08:32:01,343 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-12-02 08:32:01,344 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-12-03 08:10:38,739 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-12-03 08:10:38,755 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-12-03 08:10:38,769 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-12-03 08:10:38,773 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-12-03 08:10:39,159 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-12-03 08:10:39,163 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-12-03 08:10:39,172 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-12-03 08:10:39,173 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-12-03 08:10:39,174 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-12-03 08:10:39,175 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-12-03 08:10:39,180 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-12-03 08:12:21,692 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-12-03 08:12:21,696 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-12-03 08:12:21,698 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-12-03 08:12:21,701 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-12-03 08:12:21,702 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-12-03 08:12:21,710 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
+2012-12-03 08:21:14,754 INFO  [org.eclim.eclipse.EclimDaemon] Workspace: /home/machao/workspace
+2012-12-03 08:21:14,755 INFO  [org.eclim.eclipse.EclimDaemon] Starting eclim...
+2012-12-03 08:21:14,784 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim
+2012-12-03 08:21:14,791 INFO  [org.eclim.eclipse.EclimDaemon] Loading plugin org.eclim.core
+2012-12-03 08:21:15,006 INFO  [org.eclim.plugin.core.CorePlugin] Loading eclim plugins...
+2012-12-03 08:21:15,009 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.adt
+2012-12-03 08:21:15,011 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.wst
+2012-12-03 08:21:15,013 INFO  [org.eclim.plugin.core.CorePlugin] Loading plugin org.eclim.jdt
+2012-12-03 08:21:15,015 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
+2012-12-03 08:21:15,015 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
+2012-12-03 08:21:15,015 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2012-12-03 08:40:14,514 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2012-12-03 08:40:14,517 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2012-12-03 08:40:14,518 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2012-12-03 08:40:14,519 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2012-12-03 08:40:14,519 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2012-12-03 08:40:14,520 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.

@@ -12,9 +12,10 @@ public class JPractice {
         //assert p.isUniqueChar(s) : "the string does have duplicates.";
         assert p.isUniqueChar1(s) : "the string does have duplicates (by bitstring).";
         int a = 2;
-        System.out.print(a++ + ++a);
+        System.out.println(a++ + ++a);
         int[][] s1 = new int[0][0];
-        System.out.print(s1.length);
+        System.out.println(s1.length);
+	System.out.println(s1.length-1);
     }
 
     public boolean isUniqueChar(String s) {
