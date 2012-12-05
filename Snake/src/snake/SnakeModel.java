@@ -14,19 +14,36 @@ public class SnakeModel extends Observable {
     private Cell tail = new Cell();
     private ArrayList<Cell> flies = new ArrayList<Cell>();
     private int lengthSnake = 5;
-    private int lengthIncrement = 0;
+    private int lengthIncrement = 1;
     private int increCount = 0;
     private int maxRows, maxCols;
-    private int speed = 1;
+    private int speed = 6;
+    private int flySpeed = 1;
     private int dir = SnakeModel.up;
     private int frequency = 41;
     private int picCount = 0;
-    private int maxFlies = 5;
+    private int picCountFly = 0;
+    private int maxFlies = 10;
     private int minFlies = 1;
-    private int maxDuration = 50;
-    private int minDuration = 10;
+    private int maxDuration = 20;
+    private int minDuration = 5;
     private boolean isOver = false;
+    
+    /**
+     * @return the flySpeed
+     */
+    public int getFlySpeed() {
+        return flySpeed;
+    }
 
+    /**
+     * @param flySpeed the flySpeed to set
+     */
+    public void setFlySpeed(int flySpeed) {
+        this.flySpeed = flySpeed;
+        this.picCountFly = this.frequency / this.flySpeed;
+    }
+    
     /**
      * @return the isOver
      */
@@ -56,9 +73,22 @@ public class SnakeModel extends Observable {
             }
         }
         initSnake(lengthSnake);
-        // !!!
-        this.timer.schedule(new UpdateStatus(this), 1000, this.frequency);
         this.picCount = this.frequency / this.speed;
+        this.picCountFly = this.frequency / this.flySpeed;
+    }
+
+    /**
+     *Start the timer.
+     */
+    public void start(){
+	this.timer.schedule(new UpdateStatus(this), 1000, 1000 / this.frequency);
+    }
+    
+    /**
+     *Stop the timer.
+     */ 
+    public void stop(){
+	this.timer.cancel();
     }
 
     /**
@@ -84,7 +114,7 @@ public class SnakeModel extends Observable {
             if (this.head.getX() <= 0)
                 return false;
             nextHead = this.grid[this.head.getX() - 1][this.head.getY()];
-            if (!nextHead.isFly())
+            if (nextHead.isFly())
                 this.increCount += this.lengthIncrement;
             updateTail();
             if (nextHead.isSnake())
@@ -94,7 +124,7 @@ public class SnakeModel extends Observable {
             if (this.head.getX() >= this.maxRows - 1)
                 return false;
             nextHead = this.grid[this.head.getX() + 1][this.head.getY()];
-            if (!nextHead.isFly())
+            if (nextHead.isFly())
                 this.increCount += this.lengthIncrement;
             updateTail();
             if (nextHead.isSnake())
@@ -104,7 +134,7 @@ public class SnakeModel extends Observable {
             if (this.head.getY() >= this.maxCols - 1)
                 return false;
             nextHead = this.grid[this.head.getX()][this.head.getY() + 1];
-            if (!nextHead.isFly())
+            if (nextHead.isFly())
                 this.increCount += this.lengthIncrement;
             updateTail();
             if (nextHead.isSnake())
@@ -114,7 +144,7 @@ public class SnakeModel extends Observable {
             if (this.head.getY() <= 0)
                 return false;
             nextHead = this.grid[this.head.getX()][this.head.getY() - 1];
-            if (!nextHead.isFly())
+            if (nextHead.isFly())
                 this.increCount += this.lengthIncrement;
             updateTail();
             if (nextHead.isSnake())
@@ -163,7 +193,7 @@ public class SnakeModel extends Observable {
             this.isOver = true;
             return false;
         }
-        geneFlies();
+        //geneFlies();
         return true;
     }
 
@@ -329,6 +359,7 @@ public class SnakeModel extends Observable {
         SnakeModel model;
         int count = 0;
         int initCount = 0;
+        int flyCount = 0;
 
         /**
          * Constructor of the timer task.
@@ -344,12 +375,17 @@ public class SnakeModel extends Observable {
         public void run() {
             // TODO Auto-generated method stub
             count++;
+            flyCount++;
             if (count >= this.model.picCount) {
                 count = 0;
                 this.model.update();
                 initCount++;
                 if (initCount == this.model.lengthSnake - 1)
                     this.model.tail = this.model.grid[this.model.maxRows - 1][this.model.maxCols / 2];
+            }
+            if(flyCount >= this.model.picCountFly) {
+                flyCount = 0;
+                this.model.geneFlies();
             }
             this.model.setChanged();
             this.model.notifyObservers();
@@ -639,5 +675,19 @@ public class SnakeModel extends Observable {
      */
     public void setPicCount(int picCount) {
         this.picCount = picCount;
+    }
+
+    /**
+     * @return the picCountFly
+     */
+    public int getPicCountFly() {
+        return picCountFly;
+    }
+
+    /**
+     * @param picCountFly the picCountFly to set
+     */
+    public void setPicCountFly(int picCountFly) {
+        this.picCountFly = picCountFly;
     }
 }

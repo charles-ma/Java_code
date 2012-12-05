@@ -1,4 +1,6 @@
-This is a version of the class SnakeModel and its tests.
+This is the newest version of the class SnakeModel and its tests.
+
+You can start and stop the SnakeModel timer using corresponding methods.
 
 SnakeModel is observable so that is can be oberved by other observer classes.
 

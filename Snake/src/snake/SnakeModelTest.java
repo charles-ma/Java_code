@@ -18,7 +18,7 @@ public class SnakeModelTest {
     public void testSnakeModel() {
         assertEquals(this.model.getMaxRow(), 50);
         assertEquals(this.model.getMaxCol(), 50);
-        assertEquals(this.model.getPicCount(), 41);
+        assertEquals(this.model.getPicCount(), 13);
         assertEquals(this.model.getSnakeL(), 5);
     }
 
@@ -55,7 +55,7 @@ public class SnakeModelTest {
         this.model.geneFlies();
         assertFalse(this.model.getFlies().isEmpty());
         assertTrue(this.model.getFlies().get(0).isFly());
-        assertTrue(this.model.getFlies().get(0).getDuration() < 50 && this.model.getFlies().get(0).getDuration() > 10);
+        assertTrue(this.model.getFlies().get(0).getDuration() < 20 && this.model.getFlies().get(0).getDuration() > 5);
     }
 
     @Test
