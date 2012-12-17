@@ -5,7 +5,15 @@ import java.util.Observable;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.lang.Math.*;
 
+/**
+ * @author Charles(Chao) Ma
+ * @author Karan Srivastava
+ * @version Dec 5, 2012
+ * 
+ * Model class
+ */
 public class SnakeModel extends Observable {
 
     public Cell[][] grid;
@@ -349,10 +357,11 @@ public class SnakeModel extends Observable {
     }
 
     /**
+     * @author Charles(Chao) Ma
+     * @author Karan Srivastava
+     * @version Dec 5, 2012
+     * 
      * Class to run the timer task.
-     * 
-     * @author machao
-     * 
      */
     private class UpdateStatus extends TimerTask {
 
@@ -409,6 +418,7 @@ public class SnakeModel extends Observable {
      */
     public void setMaxRow(int maxRows) {
         this.maxRows = maxRows;
+        this.initSnake(this.lengthSnake);
     }
 
     /**
@@ -428,6 +438,7 @@ public class SnakeModel extends Observable {
      */
     public void setMaxCol(int maxCol) {
         this.maxCols = maxCol;
+        this.initSnake(this.lengthSnake);
     }
 
     /**
@@ -689,5 +700,32 @@ public class SnakeModel extends Observable {
      */
     public void setPicCountFly(int picCountFly) {
         this.picCountFly = picCountFly;
+    }
+    
+    /**
+     * reset the state of the game
+     */
+    public void resetGame() {
+        for(int i = 0; i < this.maxRows; i++) {
+            for(int j = 0; j < this.maxCols; j++) {
+                grid[i][j].setEmpty();
+            }
+        }
+        tail = this.grid[this.maxRows - 1][this.maxCols / 2];
+        flies.clear();
+        increCount = 0;
+    }
+    /**
+     * @return the current score
+     */
+    public int getScore() {
+        return (this.lengthSnake - 5) * 10 + 20 * ((this.speed / 4) - 1) * (int)Math.sqrt(this.lengthSnake - 5);
+    }
+    
+    /**
+     * @return the number of flies eaten
+     */
+    public int fliesEaten() {
+        return this.lengthSnake - 5;
     }
 }
