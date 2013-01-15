@@ -1,0 +1,2 @@
+export CLASSPATH=~/.junit4.10/junit-4.10.jar:~/workspace/Snake/bin
+java org.junit.runner.JUnitCore snake.SnakeModelTest

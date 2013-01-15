@@ -18,7 +18,7 @@ public class SnakeModelTest {
     public void testSnakeModel() {
         assertEquals(this.model.getMaxRow(), 50);
         assertEquals(this.model.getMaxCol(), 50);
-        assertEquals(this.model.getPicCount(), 13);
+        assertEquals(this.model.getPicCount(), 6);
         assertEquals(this.model.getSnakeL(), 5);
     }
 
