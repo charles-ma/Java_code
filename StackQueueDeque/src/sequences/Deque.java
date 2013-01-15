@@ -11,12 +11,20 @@ public class Deque<T> extends AbstractSequence<T> {
     //private Node curr = null;
     
     @Override
+    /**
+     * Get the iterator of the deque
+     * @return the iterator
+     */
     public Iterator<T> iterator() {
         // TODO Auto-generated method stub
         return new MyIterator(true);
     }
 
     @Override
+    /**
+     * Check if the deque is empty
+     * @return a boolean value
+     */
     public boolean isEmpty() {
         // TODO Auto-generated method stub
         if(this.count == 0) return true;
@@ -24,6 +32,9 @@ public class Deque<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Remove all the elements from the deque
+     */
     public void clear() {
         // TODO Auto-generated method stub
         this.count = 0;
@@ -33,12 +44,20 @@ public class Deque<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Get the size of the deque
+     * @return the size
+     */
     public int size() {
         // TODO Auto-generated method stub
         return this.count;
     }
 
     @Override
+    /**
+     * Add an element to the rear of the deque
+     * @param value the element
+     */
     public void add(T value) {
         // TODO Auto-generated method stub
         Node newNode = new Node();
@@ -55,6 +74,10 @@ public class Deque<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Remove the element from the front of the deque
+     * @return the element
+     */
     public T remove() throws NoSuchElementException {
         // TODO Auto-generated method stub
         if(this.count == 0) throw new NoSuchElementException();
@@ -67,13 +90,21 @@ public class Deque<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Peek the element at the front of the deque
+     * @return the element
+     */
     public T peek() throws NoSuchElementException {
         // TODO Auto-generated method stub
         if(this.count == 0) throw new NoSuchElementException();
         return this.front.data;
     }
 
-    void addFront(T value) {
+    /**
+     * Add one element to the front of the deque
+     * @param value the element
+     */
+    public void addFront(T value) {
         Node newNode = new Node();
         newNode.data = value;
         if(this.count == 0) {
@@ -87,12 +118,22 @@ public class Deque<T> extends AbstractSequence<T> {
         this.count++;
     }
     
-    T peekRear() throws NoSuchElementException {
+    /**
+     * Peek the element at the rear of the deque
+     * @return the element
+     * @throws NoSuchElementException
+     */
+    public T peekRear() throws NoSuchElementException {
         if(this.count == 0) throw new NoSuchElementException();
         return this.rear.data;
     }
-    
-    T removeRear() throws NoSuchElementException{
+
+    /**
+     * Remove the element at the rear of the deque
+     * @return the element
+     * @throws NoSuchElementException
+     */
+    public T removeRear() throws NoSuchElementException{
         if(this.count == 0) throw new NoSuchElementException();
         T tmp = this.rear.data;
         this.rear = this.rear.previous;
@@ -102,16 +143,31 @@ public class Deque<T> extends AbstractSequence<T> {
         return tmp;
     }
     
-    Iterator<T> reverseIterator(){
+    /**
+     * Get the reverse iterator
+     * @return the reverse iterator
+     */
+    public Iterator<T> reverseIterator(){
         return new MyIterator(false);
     }
     
+    /**
+     * The inner data structure to implement the linked list
+     * @author machao
+     *
+     */
     private class Node {
         public T data;
         public Node previous;
         public Node next;
     }
     
+    /**
+     * The inner iterator
+     * @author machao
+     *
+     * @param <T> the Object you want to put into the deque
+     */
     private class MyIterator<T> implements Iterator {
 
         private boolean flag;

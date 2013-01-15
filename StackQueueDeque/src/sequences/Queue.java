@@ -11,12 +11,20 @@ public class Queue<T> extends AbstractSequence<T> {
     private int count = 0;
     
     @Override
+    /**
+     * Get the Iterator of the queue
+     * @return the iterator
+     */
     public Iterator<T> iterator() {
         // TODO Auto-generated method stub
         return new MyIterator();
     }
 
     @Override
+    /**
+     * Check if the queue is empty
+     * @return a boolean value
+     */
     public boolean isEmpty() {
         // TODO Auto-generated method stub
         if(count == 0) return true;
@@ -24,6 +32,9 @@ public class Queue<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Remove all the elements from the queue
+     */
     public void clear() {
         // TODO Auto-generated method stub
         this.front = null;
@@ -33,12 +44,20 @@ public class Queue<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Get the size of the queue
+     * @return the size
+     */
     public int size() {
         // TODO Auto-generated method stub
         return this.count;
     }
 
     @Override
+    /**
+     * Add one element to the rear of the queue
+     * @param the element
+     */
     public void add(T value) {
         // TODO Auto-generated method stub
         Node newNode = new Node();
@@ -53,6 +72,10 @@ public class Queue<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Remove the element from the front of the queue
+     * @return the element
+     */
     public T remove() throws NoSuchElementException {
         // TODO Auto-generated method stub
         if(this.count == 0) throw new NoSuchElementException();
@@ -64,17 +87,32 @@ public class Queue<T> extends AbstractSequence<T> {
     }
 
     @Override
+    /**
+     * Peek the element at the front of the queue
+     * @return the element
+     */
     public T peek() throws NoSuchElementException {
         // TODO Auto-generated method stub
         if(this.count == 0) return null;
         return this.front.data;
     }
 
+    /**
+     * Inner date structure to implement the linked list
+     * @author machao
+     *
+     */
     private class Node {
         public T data = null;
         public Node next = null;
     }
 
+    /**
+     * Inner iterator
+     * @author machao
+     *
+     * @param <T> the Object you want to put into the queue
+     */
     private class MyIterator<T> implements Iterator {
 
         private Node curr;

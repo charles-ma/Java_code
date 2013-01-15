@@ -177,15 +177,38 @@ public class StackQueueDequeDisplay extends JFrame {
         return button;
     }
 
+    /**
+     * Update the contents to show the stack
+     */
     private void updateStack() {
         stackContents.setText("");
         Iterator<String> it = theStack.iterator();
         while(it.hasNext()) stackContents.append(it.next() + "\n");
     }
     
+    /**
+     * Update the contents to show the queue
+     */
+    private void updateQueue() {
+        queueContents.setText("");
+        Iterator<String> it = theQueue.iterator();
+        while(it.hasNext()) queueContents.append(it.next() + "\n");
+    }
+    
+    /**
+     * Update the contents to show the deque
+     */
+    private void updateDeque() {
+        dequeContents.setText("");
+        Iterator<String> it = theDeque.iterator();
+        while(it.hasNext()) dequeContents.append(it.next() + "\n");
+    }
+    
     private class ButtonListener implements ActionListener {
 
         Iterator<String> i = null;
+        Iterator<String> iq = null;
+        Iterator<String> id = null;
         @SuppressWarnings("synthetic-access")
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -195,17 +218,17 @@ public class StackQueueDequeDisplay extends JFrame {
                 // Call the appropriate method and update the display
                 theStack.clear();
                 updateStack();
-                i = theStack.iterator();
+                //i = theStack.iterator();
             } else if (event.getSource().equals(stackPush)) {
                 // Call the appropriate method and update the display
                 theStack.add(stackInOut.getText());
                 updateStack();
-                i = theStack.iterator();
+                //i = theStack.iterator();
             } else if (event.getSource().equals(stackPop)) {
                 // Call the appropriate method and update the display
                 stackInOut.setText(theStack.remove());
                 updateStack();
-                i = theStack.iterator();
+                //i = theStack.iterator();
             } else if (event.getSource().equals(stackPeek)) {
                 // Call the appropriate method and update the display
                 stackInOut.setText(theStack.peek());
@@ -213,7 +236,7 @@ public class StackQueueDequeDisplay extends JFrame {
             } else if (event.getSource().equals(stackIterate)) {
                 // Call the appropriate method and update the display
                 i = theStack.iterator();
-                stackInOut.setText(i.toString());
+                stackInOut.setText("iteration starts!");
                 updateStack();
             } else if (event.getSource().equals(stackHasNext)) {
                 // Call the appropriate method and update the display
@@ -227,45 +250,96 @@ public class StackQueueDequeDisplay extends JFrame {
             }
             else if (event.getSource().equals(queueGetSize)) {
                 // Call the appropriate method and update the display
+                queueInOut.setText(theQueue.size() + "");
             } else if (event.getSource().equals(queueClear)) {
                 // Call the appropriate method and update the display
+                theQueue.clear();
+                updateQueue();
+                //iq = theQueue.iterator();
             } else if (event.getSource().equals(queueEnqueue)) {
                 // Call the appropriate method and update the display
+                theQueue.add(queueInOut.getText());
+                updateQueue();
+                //iq = theQueue.iterator();
             } else if (event.getSource().equals(queueDequeue)) {
                 // Call the appropriate method and update the display
+                theQueue.remove();
+                updateQueue();
+                //iq = theQueue.iterator();
             } else if (event.getSource().equals(queuePeek)) {
                 // Call the appropriate method and update the display
+                queueInOut.setText(theQueue.peek());
+                updateQueue();
             } else if (event.getSource().equals(queueIterate)) {
                 // Call the appropriate method and update the display
+                queueInOut.setText("iteration starts!");
+                updateQueue();
+                iq = theQueue.iterator();
             } else if (event.getSource().equals(queueHasNext)) {
                 // Call the appropriate method and update the display
+                if(iq == null) iq = theQueue.iterator();
+                if(iq.hasNext()) queueInOut.setText("true");
+                else queueInOut.setText("false");
             } else if (event.getSource().equals(queueNext)) {
                 // Call the appropriate method and update the display
+                if(iq == null) iq = theQueue.iterator();
+                queueInOut.setText(iq.next());
             }
             else if (event.getSource().equals(dequeGetSize)) {
                 // Call the appropriate method and update the display
+                dequeInOut.setText(theDeque.size() + "");
             } else if (event.getSource().equals(dequeClear)) {
                 // Call the appropriate method and update the display
+                theDeque.clear();
+                updateDeque();
+                //id = theDeque.iterator();
             } else if (event.getSource().equals(dequeAddToFront)) {
                 // Call the appropriate method and update the display
+                theDeque.addFront(dequeInOut.getText());
+                updateDeque();
+                //id = theDeque.iterator();
             } else if (event.getSource().equals(dequeAddToRear)) {
                 // Call the appropriate method and update the display
+                theDeque.add(dequeInOut.getText());
+                updateDeque();
+                //id = theDeque.iterator();
             } else if (event.getSource().equals(dequeRemoveFromFront)) {
                 // Call the appropriate method and update the display
+                theDeque.remove();
+                updateDeque();
+                //id = theDeque.iterator();
             } else if (event.getSource().equals(dequeRemoveFromRear)) {
                 // Call the appropriate method and update the display
+                theDeque.removeRear();
+                updateDeque();
+                //id = theDeque.iterator();
             } else if (event.getSource().equals(dequePeekAtFront)) {
                 // Call the appropriate method and update the display
+                dequeInOut.setText(theDeque.peek());
+                updateDeque();
             } else if (event.getSource().equals(dequePeekAtRear)) {
                 // Call the appropriate method and update the display
+                dequeInOut.setText(theDeque.peekRear());
+                updateDeque();
             } else if (event.getSource().equals(dequeIterateFromFront)) {
                 // Call the appropriate method and update the display
+                dequeInOut.setText("iterator from the front!");
+                updateDeque();
+                id = theDeque.iterator();
             } else if (event.getSource().equals(dequeIterateFromRear)) {
                 // Call the appropriate method and update the display
+                dequeInOut.setText("iterator from the rear!");
+                updateDeque();
+                id = theDeque.reverseIterator();
             } else if (event.getSource().equals(dequeHasNext)) {
                 // Call the appropriate method and update the display
+                if(id == null) id = theDeque.iterator();
+                if(id.hasNext()) dequeInOut.setText("true");
+                else dequeInOut.setText("false");
             } else if (event.getSource().equals(dequeNext)) {
                 // Call the appropriate method and update the display
+                if(id == null) id = theDeque.iterator();
+                dequeInOut.setText(id.next());
             } else {
                 // Call the appropriate method and update the display
             }
