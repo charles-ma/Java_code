@@ -1,0 +1,18 @@
+package snake;
+
+public class SnakeModel {
+
+    public Cell[][] grid;
+    
+    public SnakeModel(int maxRows, int maxCols) {
+        grid = new Cell[maxRows][maxCols];
+        for(int i = 0; i < maxRows; i++) {
+            for(int j = 0; j < maxCols; j++) {
+                grid[i][j] = new Cell();
+            }
+        }
+    }
+    
+    
+    
+}
