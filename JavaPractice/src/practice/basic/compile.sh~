@@ -1,4 +1,0 @@
-javac JPractice.java
-mv JPractice.class ~/workspace/JPractice/bin/practice/basic/
-cd ~/workspace/JPractice/bin
-java practice.basic.JPractice

@@ -1,3 +1,0 @@
-javac ./Snake.java ./Cell.java ./SnakeModel.java
-cd ..
-java snake.Snake
