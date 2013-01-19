@@ -299,3 +299,9 @@
 2013-01-19 10:07:39,992 INFO  [org.eclim.plugin.core.CorePlugin] Plugins loaded.
 2013-01-19 10:07:39,993 INFO  [org.eclim.eclipse.EclimDaemon] Loaded plugin org.eclim.core
 2013-01-19 10:07:39,993 INFO  [org.eclim.eclipse.EclimDaemon] Eclim Server Started on: 127.0.0.1:9091
+2013-01-19 10:39:28,390 INFO  [org.eclim.eclipse.EclimDaemon] Shutting down eclim...
+2013-01-19 10:39:28,392 INFO  [org.eclim.eclipse.EclimDaemon] Stopping plugin org.eclim.core
+2013-01-19 10:39:28,394 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.adt
+2013-01-19 10:39:28,395 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.wst
+2013-01-19 10:39:28,395 INFO  [org.eclim.plugin.core.CorePlugin] Stopping plugin org.eclim.jdt
+2013-01-19 10:39:28,396 INFO  [org.eclim.eclipse.EclimDaemon] Eclim stopped.
