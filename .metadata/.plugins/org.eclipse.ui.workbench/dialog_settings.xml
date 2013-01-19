@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="PreferencesImportWizard">
-		<item value="/home/machao/Downloads/theme-52.epf" key=""/>
-		<list key="WizardPreferencesExportPage1.STORE_DESTINATION_NAMES_ID">
-			<item value="/home/machao/Downloads/theme-52.epf"/>
-		</list>
-	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
+<<<<<<< HEAD
 		<item value="800" key="dialogWidth"/>
 		<item value="500" key="dialogHeight"/>
+=======
+		<item value="853" key="dialogWidth"/>
+		<item value="480" key="dialogHeight"/>
+>>>>>>> 59dec3cfca2cc31aa883d9b79f3aa336b95017ae
 		<list key="orderedProviders">
 		</list>
 		<list key="textArray">
@@ -18,6 +17,7 @@
 		<list key="textEntries">
 		</list>
 	</section>
+<<<<<<< HEAD
 	<section name="WorkbenchPreferenceDialogSettings">
 		<item value="0" key="DIALOG_Y_ORIGIN"/>
 		<item value="7" key="DIALOG_X_ORIGIN"/>
@@ -46,4 +46,6 @@
 			<item value="org.eclipse.jdt.ui.Java"/>
 		</list>
 	</section>
+=======
+>>>>>>> 59dec3cfca2cc31aa883d9b79f3aa336b95017ae
 </section>

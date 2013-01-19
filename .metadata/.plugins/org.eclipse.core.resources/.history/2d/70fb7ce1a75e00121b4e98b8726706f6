@@ -1,5 +1,0 @@
-package sequences;
-
-public class Queue extends AbstractSequence<T> {
-
-}
