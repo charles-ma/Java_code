@@ -18,9 +18,71 @@ public class Timings {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-	int[] a = {-1, 2, 3};
-	int[] b = {-1, 2, 3, 4};
-	System.out.println(Timings.subset1(a, b) + "");
+	System.out.println("_________________\n");
+	for(int k = 1; k < 5; k++){
+	    long startTime = 0;
+	    long endTime = 0;
+	    boolean result = false;
+	    int[] a = randomArray(25 * k, 100, 1234);
+	    int[] b = randomArray(25 * k, 100, 1234);
+	    int[] tmp1;
+	    int[] tmp2;
+	
+	    System.out.println("Result Group " + k + "(Array size = " + k * 25 + "," + k * 25 + ")");
+
+	    randomize(a);
+	    tmp1 = a;
+	    tmp2 = b;
+	    startTime = System.nanoTime();
+	    result = Timings.subset1(a, b);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("function subset1 took " + (endTime - startTime) + " nanoseconds to do this.");
+	    startTime = System.nanoTime();
+	    result = Timings.subHash(tmp1, tmp2);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("the hash version took " + (endTime - startTime) + " nanoseconds to do this.\n");
+
+	    randomize(a);
+	    Arrays.sort(b);
+	    tmp1 = a;
+	    tmp2 = b;
+	    startTime = System.nanoTime();
+	    result = Timings.subset2(a, b);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("function subset2 took " + (endTime - startTime) + " nanoseconds to do this.");
+	    startTime = System.nanoTime();
+	    result = Timings.subHash(tmp1, tmp2);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("the hash version took " + (endTime - startTime) + " nanoseconds to do this.\n");
+
+	
+	    Arrays.sort(a);
+	    randomize(b);
+	    tmp1 = a;
+	    tmp2 = b;
+	    startTime = System.nanoTime();
+	    result = Timings.subset3(a, b);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("function subset3 took " + (endTime - startTime) + " nanoseconds to do this.");
+	    startTime = System.nanoTime();
+	    result = Timings.subHash(tmp1, tmp2);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("the hash version took " + (endTime - startTime) + " nanoseconds to do this.\n");
+
+	    Arrays.sort(a);
+	    Arrays.sort(b);
+	    tmp1 = a;
+	    tmp2 = b;
+	    startTime = System.nanoTime();
+	    result = Timings.subset4(a, b);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("function subset4 took " + (endTime - startTime) + " nanoseconds to do this.");
+	    startTime = System.nanoTime();
+	    result = Timings.subHash(tmp1, tmp2);
+	    endTime = System.nanoTime();
+	    if(result) System.out.println("the hash version took " + (endTime - startTime) + " nanoseconds to do this.");
+	    System.out.println("_________________\n");
+	}
     }
 
     /**
@@ -65,7 +127,7 @@ public class Timings {
      *@return a boolean value indicates the result
      */
     public static boolean subset1(int[] sub, int[] sup) {
-	return subHash(sub, sup);
+	return subset3(sub, sup);
     }
 
     /**
@@ -75,7 +137,12 @@ public class Timings {
      *@return a boolean value indicates the result
      */
     public static boolean subset2(int[] sub, int[] sup) {
-	return false;
+	if(sub.length == 0) return true;
+	if(sup.length == 0) return false;
+	for(int i = 0; i < sub.length; i++) {
+	    if(Arrays.binarySearch(sup, sub[i]) < 0) return false;
+	}
+	return true;
     }
 
     /**
@@ -85,7 +152,10 @@ public class Timings {
      *@return a boolean value indicates the result
      */
     public static boolean subset3(int[] sub, int[] sup) {
-	return false;
+	if(sub.length == 0) return true;
+	if(sup.length == 0) return false;
+	Arrays.sort(sup);
+	return subset2(sub, sup);
     }
 
     /**
@@ -95,7 +165,7 @@ public class Timings {
      *@return a boolean value indicates the result
      */
     public static boolean subset4(int[] sub, int[] sup) {
-	return false;
+	return subset2(sub, sup);
     }
 
     /**
