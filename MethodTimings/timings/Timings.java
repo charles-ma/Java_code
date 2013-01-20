@@ -18,17 +18,54 @@ public class Timings {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-	Timings timings = new Timings();
+	int[] a = {-1, 2, 3};
+	int[] b = {-1, 2, 3, 4};
+	System.out.println(Timings.subset1(a, b) + "");
     }
 
+    /**
+     *Tests whether array sub is a subset of array super using hash function, but this method will take up extra space, but this method is the most efficient in time complexity
+     *@param sub the sub array to be tested
+     *@param super the super array to be tested
+     *@return a boolean value indicates the result
+     */
+    private static boolean subHash(int[] sub, int[] sup) {
+	int max = 0;
+	int min = 0;
+	int hashSize = 0;
+
+	if(sub.length == 0) return true;
+	if(sup.length == 0) return false;
+
+	for(int i = 0; i < sup.length; i++) {
+	    max = max > sup[i] ? max : sup[i];
+	    min = min < sup[i] ? min : sup[i];
+	}
+
+	hashSize = max - min + 1;
+	int[] hashArray = new int[hashSize];
+
+	for(int i = 0; i < sup.length; i++) {
+	    hashArray[sup[i] - min] ++; 
+	}
+
+	for(int i = 0; i < sub.length; i++) {
+	    if(sub[i] - min < 0 || sub[i] - min > hashSize) return false;
+	    if(hashArray[sub[i] - min] == 0) return false;
+	}
+
+	return true;
+    }
+
+    
     /**
      *Tests whether array sub is a subset of array super, both of them are unsorted arrays
      *@param sub the sub array to be tested
      *@param super the super array to be tested
      *@return a boolean value indicates the result
      */
-    public static boolean subset1(int[] sub, int[] sup){
-	return false;
+    public static boolean subset1(int[] sub, int[] sup) {
+	return subHash(sub, sup);
     }
 
     /**
@@ -37,7 +74,7 @@ public class Timings {
      *@param super the super array to be tested
      *@return a boolean value indicates the result
      */
-    public static boolean subset2(int[] sub, int[] sup){
+    public static boolean subset2(int[] sub, int[] sup) {
 	return false;
     }
 
@@ -47,7 +84,7 @@ public class Timings {
      *@param super the super array to be tested
      *@return a boolean value indicates the result
      */
-    public static boolean subset3(int[] sub, int[] sup){
+    public static boolean subset3(int[] sub, int[] sup) {
 	return false;
     }
 
@@ -57,7 +94,7 @@ public class Timings {
      *@param super the super array to be tested
      *@return a boolean value indicates the result
      */
-    public static boolean subset4(int[] sub, int[] sup){
+    public static boolean subset4(int[] sub, int[] sup) {
 	return false;
     }
 
@@ -67,7 +104,7 @@ public class Timings {
      *@target the sum
      *@return subset that all its elements add up to target
      */
-    public static int[] findSubset(int[] numbers, int target){
+    public static int[] findSubset(int[] numbers, int target) {
 	return null;
     }
 

@@ -1,0 +1,2 @@
+javac -verbose timings/Timings.java
+java timings.Timings
