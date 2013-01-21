@@ -19,9 +19,10 @@ public class Timings {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 	System.out.println("_________________\n");
+	
 	for(int k = 1; k < 5; k++){
 	    long startTime = 0;
-	    long endTime = 0;
+	    long endTime = 0;    
 	    boolean result = false;
 	    int[] a = randomArray(25 * k, 100, 1234);
 	    int[] b = randomArray(25 * k, 100, 1234);
@@ -81,6 +82,26 @@ public class Timings {
 	    result = Timings.subHash(tmp1, tmp2);
 	    endTime = System.nanoTime();
 	    if(result) System.out.println("the hash version took " + (endTime - startTime) + " nanoseconds to do this.");
+	    System.out.println("_________________\n");
+	}
+
+	solve2();
+    }
+
+    private static void solve2() {
+	for(int k = 1; k < 4; k++) {
+	    int[] numbers = createProblem(2000, 10 * k, 2);
+	    System.out.println("The problem size is " + 10 * k);
+	    long sTime = System.nanoTime();
+	    int[] subNumbers = findSubset(numbers, 1000);
+	    long eTime = System.nanoTime();
+	    int sum = 0;
+	    for(int i = 0; i < subNumbers.length; i++) {
+		sum += subNumbers[i];
+	    }
+	    if(sum == 1000)
+		System.out.println("The problem is\n" + Arrays.toString(numbers) + "\nand the sub set found is\n" + Arrays.toString(subNumbers) + "\nThe time spent is " + (eTime - sTime) + " nano seconds");
+	    else System.out.println("The result is wrong!");
 	    System.out.println("_________________\n");
 	}
     }
@@ -175,7 +196,26 @@ public class Timings {
      *@return subset that all its elements add up to target
      */
     public static int[] findSubset(int[] numbers, int target) {
-	return null;
+	if(target == 0) return new int[0];
+	if(numbers.length == 0) return null;
+	if(numbers.length == 1) {
+	    if(numbers[0] == target) return numbers;
+	    else return null;
+	}
+	int[] tmpe = new int[numbers.length - 1];
+	for(int i = 1; i < numbers.length; i++) {
+	    tmpe[i - 1] = numbers[i];
+	}
+	int[] tmpe1 = findSubset(tmpe, target - numbers[0]);
+	if(tmpe1 != null) {
+	    int[] tmpe2 = new int[tmpe1.length + 1];
+	    tmpe2[0] = numbers[0];
+	    for(int i = 1; i < tmpe2.length; i++) {
+		tmpe2[i] = tmpe1[i - 1];
+	    }
+	    return tmpe2;
+	} 
+	return findSubset(tmpe, target);
     }
 
     /**

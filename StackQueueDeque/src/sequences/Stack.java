@@ -16,7 +16,7 @@ public class Stack<T> extends AbstractSequence<T> {
      */
     public Iterator<T> iterator() {
         // TODO Auto-generated method stub
-        return new MyIterator();
+        return new MyIterator<T>();
     }
 
     @Override
@@ -109,7 +109,7 @@ public class Stack<T> extends AbstractSequence<T> {
      *
      * @param <T> the class you want to put into the stack
      */
-    private class MyIterator<T> implements Iterator {
+    private class MyIterator<E> implements Iterator<T> {
 
         private Node curr;
         
@@ -125,10 +125,10 @@ public class Stack<T> extends AbstractSequence<T> {
         }
 
         @Override
-        public Object next() {
+        public T next() {
             // TODO Auto-generated method stub
             if(curr != null) {
-                Object tmp = curr.data;
+                T tmp = curr.data;
                 curr = curr.next;
                 return tmp;
             }

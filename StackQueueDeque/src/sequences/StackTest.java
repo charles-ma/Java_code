@@ -114,10 +114,11 @@ public class StackTest {
      */
     @Test
     public final void testIterator() {
-        s.add(10);
+    	s.add(10);
         s.add(20);
         s.add(30);
         Iterator<Integer> iter = s.iterator();
+        iter.hasNext();
         assertTrue("Stack hasNext() not working", iter.hasNext());
         assertEquals("Stack next() not working", 30, (int)iter.next());
         assertTrue("Stack hasNext() not working", iter.hasNext());

@@ -1,0 +1,34 @@
+package timings;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class TimingsTest {
+
+	@Test
+	public void testSubset1() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSubset2() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSubset3() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSubset4() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testFindSubset() {
+		fail("Not yet implemented");
+	}
+
+}

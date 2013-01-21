@@ -1,0 +1,2 @@
+export CLASSPATH=~/.junit4.10/junit-4.10.jar:~/workspace/MethodTimings
+java org.junit.runner.JUnitCore timings.TimingsTest
