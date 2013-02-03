@@ -114,7 +114,7 @@ public class TreeTest {
 		assertEquals(tree.getValue(), "one");
 		assertEquals(tree.getChild(0).getValue(), "two");
 		assertEquals(tree.getChild(1).getChild(1).getValue(), "five");
-		//assertEquals(tree.getChild(1).getChild(1).getChild(2).getValue(), "eight");
+		assertEquals(tree.getChild(1).getChild(1).getChild(2).getValue(), "eight");
 	}
 
 	@Test

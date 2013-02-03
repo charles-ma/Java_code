@@ -14,14 +14,6 @@ public class Tree<V> {
 	
 	private ArrayList<Tree<V>> children = new ArrayList<Tree<V>>();
 	private V value = null;
-		
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 	
 	/**
 	 * Constructs a Tree with the given value in the root node, having the given children

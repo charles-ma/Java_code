@@ -17,7 +17,7 @@ public class Expression {
 	 */
 	public Expression(String expression) throws IllegalArgumentException {
 		this.tree = Tree.parse(expression);
-		//if(!isValidate(this.tree)) throw new IllegalArgumentException("Invalidate tree!");
+		if(!isValidate(this.tree)) throw new IllegalArgumentException("Invalidate tree!");
 	}
 	
 	/**
@@ -90,10 +90,28 @@ public class Expression {
 	
 	@Override
 	public String toString() {
-		return this.tree.toString();
+		String result = toString(this.tree);
+		return result.substring(1, result.length() - 1);
 	}
 	
-	public void print() {
-		this.tree.print();
+	/**
+	 * Gets the normal expression from the tree
+	 * @param tree the tree to be converted
+	 * @return normal expression
+	 */
+	private String toString(Tree<String> tree) {
+		StringBuffer result = new StringBuffer();
+		if(!isValidate(tree)) return result.toString();
+		if(tree.getNumberOfChildren() != 0) {
+			result.append("(");
+			for(int i = 0; i < tree.getNumberOfChildren(); i++) {
+				result.append(toString(tree.getChild(i)));
+				if(i != tree.getNumberOfChildren() - 1) result.append(tree.getValue());
+			}
+			result.append(")");
+		} else {
+			result.append(tree.getValue());
+		}
+		return result.toString();
 	}
 }
