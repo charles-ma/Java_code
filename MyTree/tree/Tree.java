@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 /**
  * @author machao
- * an implementation of the tree data structure
+ * An implementation of the tree data structure
  */
 public class Tree<V> {
 	
@@ -61,6 +61,7 @@ public class Tree<V> {
 	public void addChild(int index, Tree<V> child) {
 		if(shareNodes(child)) throw new IllegalArgumentException("Circular tree!");
 		this.children.add(index, child);
+		//this.print();
 	}
 	
 	/**
@@ -116,7 +117,78 @@ public class Tree<V> {
 	 * @return a new Tree<String>
 	 */
 	public static Tree<String> parse(String treeDescription) {
-		return new Tree<String>("");
+		Tree<String> tree = null;
+		if(treeDescription == null) return null;
+		treeDescription = treeDescription.trim();
+		int parePos = -1;
+		for(int i = 0; i < treeDescription.length(); i++) {
+			if(treeDescription.charAt(i) == '(') {
+				parePos = i;
+				break;
+			}
+		}
+		if(parePos == -1) { 
+			tree = new Tree<String>(treeDescription.replace(" ", ""));
+		} else {
+			tree = new Tree<String>(treeDescription.substring(0, parePos).replace(" ", ""));
+			String inner = treeDescription.substring(parePos + 1);
+			int end = inner.length() - 1;
+			for(int i = inner.length() - 1; i >= 0; i--) {
+				if(inner.charAt(i) == ')') {
+					end = i;
+					break;
+				} 
+			}
+			inner = inner.substring(0, end);
+			String clean = new String();
+			for(int i = 0; i < inner.length(); i++) {
+				if(inner.charAt(i) != '(') clean = clean + inner.substring(i, i + 1);
+				else {
+					while(clean.charAt(clean.length() - 1) == ' ') {
+						clean = clean.substring(0, clean.length() - 1);
+					}
+					clean = clean + inner.substring(i, i + 1);
+				}
+			}
+			clean = clean.trim();
+			String[] subDes = clean.split(" ");
+			String subDescription = new String("");
+			int pCount = 0;
+			Tree<String> sub = null;
+			for(int i = 0; i < subDes.length; i++) {
+				subDes[i] = subDes[i].replace(" ", "");
+				if(subDes[i].equals("")) continue;
+				if(subDes[i].contains("(")) {
+					if(pCount == 0) {
+						subDescription = "";	
+					}
+					subDescription += (subDes[i] + " ");
+					for(int k = 0; k < subDes[i].length(); k++) {
+						if(subDes[i].charAt(k) == '(') pCount++;
+						if(subDes[i].charAt(k) == ')') pCount--;
+					}
+				} else if(subDes[i].contains(")")) {
+					for(int k = 0; k < subDes[i].length(); k++) {
+						if(subDes[i].charAt(k) == '(') pCount++;
+						if(subDes[i].charAt(k) == ')') pCount--;
+					}
+					subDescription += (subDes[i] + " ");
+					if(pCount == 0) {
+						sub = Tree.parse(subDescription);
+						tree.addChild(tree.getNumberOfChildren(), sub);
+					}
+					//sub = new Tree<String>(subDescription);
+				} else if(pCount > 0) {
+					subDescription += (subDes[i] + " "); 
+				} else {
+					//sub = new Tree<String>(subDescription);
+					sub = Tree.parse(subDes[i]);
+					tree.addChild(tree.getNumberOfChildren(), sub);
+				}
+			}
+		}
+		return tree;
+		
 	}
 	
 	/**
@@ -142,7 +214,10 @@ public class Tree<V> {
 	@Override
 	public String toString() {
 		String tmp = new String();
-		for(Tree<V> child : this.children) tmp = tmp + child.toString() + " ";
+		for(int i = 0; i < this.children.size(); i++) {
+			tmp = tmp + this.children.get(i).toString();
+			if(i != this.children.size() - 1) tmp = tmp + " ";
+		} 
 		if(getNumberOfChildren() != 0) tmp = this.value.toString() + "(" + tmp + ")";
 		else tmp = this.value.toString();
 		return tmp;
@@ -150,6 +225,13 @@ public class Tree<V> {
 	
 	@Override
 	public boolean equals(Object obj) {
+		if(! (obj instanceof Tree<?>)) return false;
+		Tree<V> other = (Tree<V>) obj;
+		if(this.value != other.value) return false;
+		if(this.children.size() != other.children.size()) return false;
+		for(int i = 0; i < this.children.size(); i++) {
+			if(this.children.get(i).value != other.children.get(i).value) return false;
+		}
 		return true;
 	}
 	
@@ -159,6 +241,7 @@ public class Tree<V> {
 	 * @return a boolean value
 	 */
 	boolean shareNodes(Tree<V> other) {
+		if(other == null) return false;
 		if(this.contains(other)) return true;
 		else if(other.getNumberOfChildren() == 0) return false;
 		else {

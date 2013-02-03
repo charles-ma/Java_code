@@ -41,8 +41,8 @@ public class TreeTest {
 
 	@Test
 	public void testGetValue() {
-		assertEquals(this.level0, "0");
-		assertEquals(this.level2_0, "2_0");
+		assertEquals(this.level0.getValue(), "0");
+		assertEquals(this.level2_0.getValue(), "2_0");
 		assertFalse(this.level2_1.getValue().equals("what?"));
 	}
 
@@ -108,7 +108,13 @@ public class TreeTest {
 
 	@Test
 	public void testParse() {
-	
+		String input1 = "one( two  three( four five (six  seven eight))  )";
+		Tree<String> tree = Tree.parse(input1);
+		tree.print();
+		assertEquals(tree.getValue(), "one");
+		assertEquals(tree.getChild(0).getValue(), "two");
+		assertEquals(tree.getChild(1).getChild(1).getValue(), "five");
+		//assertEquals(tree.getChild(1).getChild(1).getChild(2).getValue(), "eight");
 	}
 
 	@Test
@@ -118,20 +124,28 @@ public class TreeTest {
 		this.level1_0.print();
 		System.out.println("------------------");
 		this.level1_1.print();
+		System.out.println("------------------");
 	}
 
 	@Test
 	public void testToString() {
-		System.out.print(this.level0.toString());
+		assertEquals(this.level0.toString(), "0(1_0(2_0 2_1) 1_1)");
 	}
 
 	@Test
 	public void testEqualsObject() {
-	
+		assertTrue(this.level0.equals(this.level0));
+		assertFalse(this.level0.equals(this.level1_0));
+		assertFalse(this.level0.equals(this.level2_1));
+		assertFalse(this.level0.equals(1));
+		assertFalse(this.level0.equals(null));
 	}
 
 	@Test
 	public void testShareNodes() {
-		
+		assertTrue(this.level0.shareNodes(this.level0));
+		assertTrue(this.level0.shareNodes(this.level2_0));
+		assertFalse(this.level1_1.shareNodes(this.level1_0));
+		assertFalse(this.level0.shareNodes(null));
 	}
 }
