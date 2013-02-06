@@ -1,5 +1,6 @@
 /**
  * tree package contains a tree data structure and a class to evaluate expressions
+ * @author machao
  */
 package tree;
 
