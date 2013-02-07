@@ -15,7 +15,7 @@ public class Timing {
 	 * @param args system parameter
 	 */
 	public static void main(String[] args) {
-				
+		
 	}
 
 }
