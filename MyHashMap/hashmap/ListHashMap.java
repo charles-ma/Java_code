@@ -4,6 +4,7 @@
 package hashmap;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,10 +15,30 @@ import java.util.Set;
  */
 public class ListHashMap<K, V> implements Map<K, V> {
 
+	private LinkedList<Pair<K, V>>[] buckets = null; 
+	
+	/**
+	 * Constructor of the ListHashMap
+	 * @param size the number of the hashing buckets
+	 */
+	public ListHashMap(int size) {
+		this.buckets = new LinkedList[size];
+		for(int i = 0; i < size; i++) {
+			LinkedList<Pair<K, V>> bucket = new LinkedList<Pair<K, V>>();
+			this.buckets[i] = bucket;
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.util.Map#size()
+	 */
 	@Override
 	public int size() {
-		
-		return 0;
+		int size = 0;
+		for(LinkedList bucket : this.buckets) {
+			if(bucket.size() != 0) size++;
+		}
+		return size;
 	}
 
 	/* (non-Javadoc)
@@ -25,8 +46,7 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size() == 0;
 	}
 
 	/* (non-Javadoc)
@@ -34,7 +54,12 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public boolean containsKey(Object key) {
-		// TODO Auto-generated method stub
+		K formalKey = (K) key;
+		int hashCode = formalKey.hashCode() % (this.buckets.length);
+		LinkedList<Pair<K, V>> bucket = this.buckets[hashCode];
+		for(Pair<K, V> pair: bucket) {
+			if(pair.getKey().equals(formalKey)) return true;
+		} 
 		return false;
 	}
 
@@ -43,7 +68,12 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public boolean containsValue(Object value) {
-		// TODO Auto-generated method stub
+		V formalVal = (V) value;
+		for(LinkedList<Pair<K, V>> bucket : this.buckets) {
+			for(Pair<K, V> pair : bucket) {
+				if(pair.getValue().equals(formalVal)) return true;
+			}
+		}
 		return false;
 	}
 
@@ -52,7 +82,13 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public V get(Object key) {
-		// TODO Auto-generated method stub
+		if(!containsKey(key)) return null;
+		K formalKey = (K) key;
+		int hashCode = key.hashCode() % this.buckets.length;
+		LinkedList<Pair<K, V>> bucket = this.buckets[hashCode];
+		for(Pair<K, V> pair : bucket) {
+			if(pair.getKey().equals(formalKey)) return pair.getValue();
+		}
 		return null;
 	}
 
