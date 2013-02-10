@@ -5,27 +5,29 @@ package hashmap;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import tree.Tree;
 
 /**
- * This class implements hashmap using bucket hashing and using linked lists as elements in the bucket
+ * This class implements hashmap using bucket hashing and using trees as elements in the bucket
  * @author machao
  * @version 1.0
  */
-public class ListHashMap<K, V> implements Map<K, V> {
+public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 
-	private LinkedList<Pair<K, V>>[] buckets = null; 
+	private SortedBinaryTree<Pair<K, V>>[] buckets = null; 
 	
 	/**
-	 * Constructor of the ListHashMap
+	 * Constructor of the TreeHashMap
 	 * @param size the number of the hashing buckets
 	 */
-	public ListHashMap(int size) {
-		this.buckets = new LinkedList[size];
+	public TreeHashMap(int size) {
+		this.buckets = new SortedBinaryTree[size];
 		for(int i = 0; i < size; i++) {
-			LinkedList<Pair<K, V>> bucket = new LinkedList<Pair<K, V>>();
+			SortedBinaryTree<Pair<K, V>> bucket = new SortedBinaryTree<Pair<K, V>>(null);
 			this.buckets[i] = bucket;
 		}
 	}
@@ -36,7 +38,7 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	@Override
 	public int size() {
 		int size = 0;
-		for(LinkedList bucket : this.buckets) {
+		for(SortedBinaryTree bucket : this.buckets) {
 			if(bucket.size() != 0) size++;
 		}
 		return size;
@@ -57,10 +59,12 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	public boolean containsKey(Object key) {
 		K formalKey = (K) key;
 		int hashCode = Math.abs(formalKey.hashCode()) % (this.buckets.length);
-		LinkedList<Pair<K, V>> bucket = this.buckets[hashCode];
-		for(Pair<K, V> pair: bucket) {
+		SortedBinaryTree<Pair<K, V>> bucket = this.buckets[hashCode];
+		Iterator i = bucket.iterator();
+		while(i.hasNext()) {
+			Pair<K, V> pair = (Pair<K, V>) i.next();
 			if(pair.getKey().equals(formalKey)) return true;
-		} 
+		}
 		return false;
 	}
 
@@ -70,8 +74,10 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	@Override
 	public boolean containsValue(Object value) {
 		V formalVal = (V) value;
-		for(LinkedList<Pair<K, V>> bucket : this.buckets) {
-			for(Pair<K, V> pair : bucket) {
+		for(SortedBinaryTree<Pair<K, V>> bucket : this.buckets) {
+			Iterator i = bucket.iterator();
+			while(i.hasNext()) {
+				Pair<K, V> pair = (Pair<K, V>) i.next();
 				if(pair.getValue().equals(formalVal)) return true;
 			}
 		}
@@ -86,8 +92,10 @@ public class ListHashMap<K, V> implements Map<K, V> {
 		if(!containsKey(key)) return null;
 		K formalKey = (K) key;
 		int hashCode = Math.abs(key.hashCode()) % this.buckets.length;
-		LinkedList<Pair<K, V>> bucket = this.buckets[hashCode];
-		for(Pair<K, V> pair : bucket) {
+		SortedBinaryTree<Pair<K, V>> bucket = this.buckets[hashCode];
+		Iterator i = bucket.iterator();
+		while(i.hasNext()) {
+			Pair<K, V> pair = (Pair<K, V>) i.next();
 			if(pair.getKey().equals(formalKey)) return pair.getValue();
 		}
 		return null;
@@ -100,10 +108,12 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	public V put(K key, V value) {
 		if(key == null) return null;
 		int hashCode = Math.abs(key.hashCode()) % this.buckets.length;
-		LinkedList<Pair<K, V>> bucket = this.buckets[hashCode];
+		SortedBinaryTree<Pair<K, V>> bucket = this.buckets[hashCode];
 		if(containsKey(key)) {
-			for(Pair<K, V> pair : bucket) {
-				if(pair.getKey().equals(key)) { 
+			Iterator i = bucket.iterator();
+			while(i.hasNext()) {
+				Pair<K, V> pair = (Pair<K, V>) i.next();
+				if(pair.getKey().equals(key)) {
 					pair.setValue(value);
 					break;
 				}
@@ -145,7 +155,7 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public void clear() {
-		for(LinkedList<Pair<K, V>> bucket : this.buckets) bucket.clear(); 
+		for(SortedBinaryTree<Pair<K, V>> bucket : this.buckets) bucket.clear(); 
 	}
 
 	/* (non-Javadoc)
@@ -154,8 +164,12 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	@Override
 	public Set<K> keySet() {
 		Set<Object> keySet = new HashSet<Object>();
-		for(LinkedList<Pair<K, V>> bucket : this.buckets) {
-			for(Pair<K, V> pair : bucket) keySet.add(pair.getKey());
+		for(SortedBinaryTree<Pair<K, V>> bucket : this.buckets) {
+			Iterator i = bucket.iterator();
+			while(i.hasNext()) {
+				Pair<K, V> pair = (Pair<K, V>) i.next();
+				keySet.add(pair.getKey());
+			}
 		} 
 		return (Set<K>)keySet;
 	}
@@ -195,7 +209,7 @@ public class ListHashMap<K, V> implements Map<K, V> {
 	 * @param <M> The type of the key
 	 * @param <N> The type of the value
 	 */
-	private class Pair<M, N> {
+	private class Pair<M extends Comparable, N> implements Comparable{
 		private M k;
 		private N v;
 		
@@ -240,6 +254,72 @@ public class ListHashMap<K, V> implements Map<K, V> {
 		public void setValue(N v) {
 			this.v = v;
 		}
+
+		@Override
+		public int compareTo(Object o) {
+			Pair<K, V> other = (Pair<K, V>) o;
+			return this.k.compareTo(other.k);
+		}
 		
+	}
+	
+	public class SortedBinaryTree<T extends Comparable> extends Tree<T>{
+		
+		private int size = 0;
+		
+		/**
+		 * Constructor of the SortedBinaryTree
+		 * @param value the value stored in the root node
+		 * @param children the children of the root node
+		 * @throws IllegalArgumentException
+		 */
+		public SortedBinaryTree(T value, SortedBinaryTree<T>... children) throws IllegalArgumentException{
+			super(value, children);
+			if(value == null) this.size = 0;
+			else {
+				for(int i = 0; i < children.length; i++) {
+					this.size += children[i].size;
+				}
+			}
+		}
+		
+		/**
+		 * Gets the size of the tree
+		 * @return the size
+		 */
+		public int size() {
+			return this.size;
+		}
+		
+		/**
+		 * Adds new value to the tree
+		 * @param value the value to be added
+		 */
+		public void add(T value) {
+			if(this.value == null) this.value = value;
+			else if(this.value.compareTo(value) == -1) {
+				if(this.getChild(1) == null) this.addChild(1, new SortedBinaryTree(value));
+				else {
+					SortedBinaryTree rightChi = (SortedBinaryTree) this.getChild(1);
+					rightChi.add(value);
+				}
+			} else if(this.value.compareTo(value) >= 0) {
+				if(this.getChild(0) == null) this.addChild(0, new SortedBinaryTree(value));
+				else {
+					SortedBinaryTree leftChi = (SortedBinaryTree) this.getChild(0);
+					leftChi.add(value);
+				}
+			}
+			this.size++;
+		}
+		
+		/**
+		 * Removes all the elements from the tree
+		 */
+		public void clear() {
+			this.children.clear();
+			this.value = null;
+			this.size = 0;
+		}
 	}
 }

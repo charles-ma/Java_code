@@ -13,8 +13,8 @@ import java.util.Iterator;
  */
 public class Tree<V> {
 	
-	private ArrayList<Tree<V>> children = new ArrayList<Tree<V>>();
-	private V value = null;
+	protected ArrayList<Tree<V>> children = new ArrayList<Tree<V>>();
+	protected V value = null;
 	
 	/**
 	 * Constructs a Tree with the given value in the root node, having the given children
@@ -79,7 +79,10 @@ public class Tree<V> {
 	 * @return the child at a certain index
 	 */
 	public Tree<V> getChild(int index) {
-		return this.children.get(index);
+		if(index < this.children.size() && index >= 0) {
+			return this.children.get(index);
+		}
+		else return null;
 	}
 	
 	/**
