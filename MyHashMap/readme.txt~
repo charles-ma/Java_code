@@ -1,0 +1,35 @@
+The time of the put method of ListHashMap repeated 2000000 times is 113168512 nano secs
+The time of the get method of ListHashMap repeated 2000000 times is 180832353 nano secs
+The time of the put method of ListHashMap repeated 3000000 times is 166770230 nano secs
+The time of the get method of ListHashMap repeated 3000000 times is 201484631 nano secs
+The time of the put method of ListHashMap repeated 4000000 times is 220707885 nano secs
+The time of the get method of ListHashMap repeated 4000000 times is 267216524 nano secs
+The time of the put method of ListHashMap repeated 5000000 times is 276395553 nano secs
+The time of the get method of ListHashMap repeated 5000000 times is 329383856 nano secs
+
+The time of the put method of TreeHashMap repeated 2000000 times is 125678831 nano secs
+The time of the get method of TreeHashMap repeated 2000000 times is 324303602 nano secs
+The time of the put method of TreeHashMap repeated 3000000 times is 260457841 nano secs
+The time of the get method of TreeHashMap repeated 3000000 times is 842217575 nano secs
+The time of the put method of TreeHashMap repeated 4000000 times is 231540269 nano secs
+The time of the get method of TreeHashMap repeated 4000000 times is 808603874 nano secs
+The time of the put method of TreeHashMap repeated 5000000 times is 539797971 nano secs
+The time of the get method of TreeHashMap repeated 5000000 times is 1047703344 nano secs
+
+The time of the put method of Java HashMap repeated 2000000 times is 114292398 nano secs
+The time of the get method of Java HashMap repeated 2000000 times is 22760294 nano secs
+The time of the put method of Java HashMap repeated 3000000 times is 60710095 nano secs
+The time of the get method of Java HashMap repeated 3000000 times is 38352016 nano secs
+The time of the put method of Java HashMap repeated 4000000 times is 95919879 nano secs
+The time of the get method of Java HashMap repeated 4000000 times is 50711406 nano secs
+The time of the put method of Java HashMap repeated 5000000 times is 120955466 nano secs
+The time of the get method of Java HashMap repeated 5000000 times is 59612817 nano secs
+
+
+Above is one result from my experiment.
+
+In theory, the put and get method of hashmap should be O(1)
+So if you repeat it for N, 2N, 3N, 4N times, the time will increase linearly
+
+
+

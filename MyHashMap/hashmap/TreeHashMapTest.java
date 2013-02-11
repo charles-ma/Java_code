@@ -2,6 +2,9 @@ package hashmap;
 
 import static org.junit.Assert.*;
 
+import hashmap.TreeHashMap.SortedBinaryTree;
+
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Test;
@@ -113,9 +116,9 @@ public class TreeHashMapTest {
 
 	@Test
 	public void testEquals() {
-		ListHashMap<String, Integer> other = null;
+		TreeHashMap<String, Integer> other = null;
 		assertFalse(this.treeHash.equals(other));
-		other = new ListHashMap<String, Integer>(10);
+		other = new TreeHashMap<String, Integer>(10);
 		this.treeHash.put("first", 1);
 		this.treeHash.put("second", 2);
 		this.treeHash.put("third", 3);
@@ -125,6 +128,18 @@ public class TreeHashMapTest {
 		assertEquals(this.treeHash, other);
 		other.put("fourth", 4);
 		assertFalse(this.treeHash.equals(other));
+	}
+	
+	@Test
+	public void treeTest() {
+		TreeHashMap.SortedBinaryTree tree = this.treeHash.tree;
+		assertEquals(1, tree.size());
+		tree.add(2);
+		assertEquals(2, tree.size());
+		ArrayList<SortedBinaryTree> list = tree.toList();
+		assertTrue(list.get(0).getValue().equals(1));
+		tree.clear();
+		assertEquals(null, tree.getValue());
 	}
 }
 

@@ -3,6 +3,7 @@
  */
 package hashmap;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,7 +20,7 @@ import tree.Tree;
 public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 
 	private SortedBinaryTree<Pair<K, V>>[] buckets = null; 
-	
+	public SortedBinaryTree<Integer> tree = new SortedBinaryTree<Integer>(1);	
 	/**
 	 * Constructor of the TreeHashMap
 	 * @param size the number of the hashing buckets
@@ -60,10 +61,11 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 		K formalKey = (K) key;
 		int hashCode = Math.abs(formalKey.hashCode()) % (this.buckets.length);
 		SortedBinaryTree<Pair<K, V>> bucket = this.buckets[hashCode];
-		Iterator i = bucket.iterator();
-		while(i.hasNext()) {
-			Pair<K, V> pair = (Pair<K, V>) i.next();
-			if(pair.getKey().equals(formalKey)) return true;
+		ArrayList<SortedBinaryTree<Pair<K, V>>> nodes = bucket.toList();
+		for(int i = 0; i < nodes.size(); i++){
+			Tree<Pair<K, V>> tree = nodes.get(i);
+			Pair<K, V> pair = tree.getValue();
+			if(pair != null && pair.getKey().equals(formalKey)) return true;
 		}
 		return false;
 	}
@@ -75,10 +77,11 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 	public boolean containsValue(Object value) {
 		V formalVal = (V) value;
 		for(SortedBinaryTree<Pair<K, V>> bucket : this.buckets) {
-			Iterator i = bucket.iterator();
-			while(i.hasNext()) {
-				Pair<K, V> pair = (Pair<K, V>) i.next();
-				if(pair.getValue().equals(formalVal)) return true;
+			ArrayList<SortedBinaryTree<Pair<K, V>>> nodes = bucket.toList();
+			for(int i = 0; i < nodes.size(); i++){
+				Tree<Pair<K, V>> tree = nodes.get(i);
+				Pair<K, V> pair = tree.getValue();
+				if(pair != null && pair.getValue().equals(formalVal)) return true;
 			}
 		}
 		return false;
@@ -93,9 +96,10 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 		K formalKey = (K) key;
 		int hashCode = Math.abs(key.hashCode()) % this.buckets.length;
 		SortedBinaryTree<Pair<K, V>> bucket = this.buckets[hashCode];
-		Iterator i = bucket.iterator();
-		while(i.hasNext()) {
-			Pair<K, V> pair = (Pair<K, V>) i.next();
+		ArrayList<SortedBinaryTree<Pair<K, V>>> nodes = bucket.toList();
+		for(int i = 0; i < nodes.size(); i++){
+			Tree<Pair<K, V>> tree = nodes.get(i);
+			Pair<K, V> pair = tree.getValue();
 			if(pair.getKey().equals(formalKey)) return pair.getValue();
 		}
 		return null;
@@ -109,18 +113,7 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 		if(key == null) return null;
 		int hashCode = Math.abs(key.hashCode()) % this.buckets.length;
 		SortedBinaryTree<Pair<K, V>> bucket = this.buckets[hashCode];
-		if(containsKey(key)) {
-			Iterator i = bucket.iterator();
-			while(i.hasNext()) {
-				Pair<K, V> pair = (Pair<K, V>) i.next();
-				if(pair.getKey().equals(key)) {
-					pair.setValue(value);
-					break;
-				}
-			}
-		} else {
-			bucket.add(new Pair<K, V>(key, value));
-		}
+		bucket.add(new Pair<K, V>(key, value));
 		return value;
 	}
 
@@ -165,10 +158,11 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 	public Set<K> keySet() {
 		Set<Object> keySet = new HashSet<Object>();
 		for(SortedBinaryTree<Pair<K, V>> bucket : this.buckets) {
-			Iterator i = bucket.iterator();
-			while(i.hasNext()) {
-				Pair<K, V> pair = (Pair<K, V>) i.next();
-				keySet.add(pair.getKey());
+			ArrayList<SortedBinaryTree<Pair<K, V>>> nodes = bucket.toList();
+			for(int i = 0; i < nodes.size(); i++){
+				Tree<Pair<K, V>> tree = nodes.get(i);
+				Pair<K, V> pair = tree.getValue();
+				if(pair != null) keySet.add(pair.getKey());
 			}
 		} 
 		return (Set<K>)keySet;
@@ -193,8 +187,8 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 	@Override
 	public boolean equals(Object other) {
 		if(other == null) return false;
-		if(!(other instanceof ListHashMap<?, ?>)) return false;
-		ListHashMap<K, V> otherMap = (ListHashMap<K, V>) other;
+		if(!(other instanceof TreeHashMap<?, ?>)) return false;
+		TreeHashMap<K, V> otherMap = (TreeHashMap<K, V>) other;
 		if(!keySet().equals(otherMap.keySet())) return false;
 		for(K key : keySet()) {
 			if(!otherMap.get(key).equals(get(key))) return false;
@@ -266,6 +260,7 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 	public class SortedBinaryTree<T extends Comparable> extends Tree<T>{
 		
 		private int size = 0;
+		private ArrayList<SortedBinaryTree<T>> trees = new ArrayList<SortedBinaryTree<T>>();
 		
 		/**
 		 * Constructor of the SortedBinaryTree
@@ -277,6 +272,7 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 			super(value, children);
 			if(value == null) this.size = 0;
 			else {
+				this.size++;
 				for(int i = 0; i < children.length; i++) {
 					this.size += children[i].size;
 				}
@@ -298,19 +294,25 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 		public void add(T value) {
 			if(this.value == null) this.value = value;
 			else if(this.value.compareTo(value) == -1) {
-				if(this.getChild(1) == null) this.addChild(1, new SortedBinaryTree(value));
+				if(this.getChild(1) == null) {
+					this.addChild(0, new SortedBinaryTree(null));
+					this.addChild(1, new SortedBinaryTree(value));
+				}
 				else {
 					SortedBinaryTree rightChi = (SortedBinaryTree) this.getChild(1);
 					rightChi.add(value);
 				}
-			} else if(this.value.compareTo(value) >= 0) {
+			} else if(this.value.compareTo(value) == 1) {
 				if(this.getChild(0) == null) this.addChild(0, new SortedBinaryTree(value));
 				else {
 					SortedBinaryTree leftChi = (SortedBinaryTree) this.getChild(0);
 					leftChi.add(value);
 				}
+			} else {
+				this.value = value;
+				this.size--;
 			}
-			this.size++;
+			this.size++;			
 		}
 		
 		/**
@@ -320,6 +322,31 @@ public class TreeHashMap<K extends Comparable, V> implements Map<K, V> {
 			this.children.clear();
 			this.value = null;
 			this.size = 0;
+		}
+		
+		/**
+		 * Gets an arraylist of trees
+		 * @return the arraylist
+		 */
+		public ArrayList<SortedBinaryTree<T>> toList() {
+			toList(trees);
+			return trees;
+		}
+		
+		/**
+		 * Gets an arraylist of trees
+		 * @param trees the arraylist
+		 */
+		public void toList(ArrayList<SortedBinaryTree<T>> trees) {
+			trees.add(this);
+			if(getChild(0) != null) {
+				SortedBinaryTree<T> left = (SortedBinaryTree<T>)getChild(0);
+				left.toList(trees);
+			} 
+			if(getChild(1) != null) {
+				SortedBinaryTree<T> right = (SortedBinaryTree<T>)getChild(1);
+				right.toList(trees);
+			}
 		}
 	}
 }
