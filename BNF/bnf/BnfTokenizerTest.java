@@ -41,11 +41,6 @@ public class BnfTokenizerTest {
 		assertFalse(this.tokenizer.hasNext());
 	}
 
-	@Test
-	public void testNext() {
-
-	}
-
 	@Test(expected=UnsupportedOperationException.class)
 	public void testRemove() {
 		this.tokenizer.remove();
@@ -102,6 +97,13 @@ public class BnfTokenizerTest {
 			this.reader.close();
 		} catch (IOException e) {
 			System.err.println("Can't close the stream.");
+		}
+	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testNext() {
+		for(int i = 0; i < 46; i++) {
+			System.out.println(this.tokenizer.next().getValue());
 		}
 	}
 }
