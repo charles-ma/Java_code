@@ -45,7 +45,7 @@ public class BnfTokenizer implements Iterator<Token> {
 
 	@Override
 	public void remove() {
-
+		throw new UnsupportedOperationException("You can't remove!");
 	}
 	
 	/**
