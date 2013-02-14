@@ -60,7 +60,11 @@ public class BnfTokenizer implements Iterator<Token> {
 			try {
 				currChar = getChar();				
 			} catch (IOException e) {
-				throw new UnsupportedOperationException("Don't have any tokens left!");
+				if(this.state == State.TERM || this.state == State.ESCAPEDEF2 || this.state == State.ESCAPEDEF || this.state == State.METAORTERM2 || this.state == State.METAORTERM) {
+					return new Token(TokenType.TERMINAL, value.toString());
+				} else {
+					throw new UnsupportedOperationException("Don't have any tokens left!");
+				}
 			}
 			switch(this.state) {
 				case START:
@@ -74,7 +78,7 @@ public class BnfTokenizer implements Iterator<Token> {
 					} else if(currChar == ':') {
 						this.state = State.METAORTERM;
 						value.append(currChar);
-					} else if(currChar == ' ' || currChar == '\n') {
+					} else if(currChar == ' ') {
 						this.state = State.START;
 					} else if(currChar == '\\') {
 						this.state = State.ESCAPE;
@@ -119,13 +123,36 @@ public class BnfTokenizer implements Iterator<Token> {
 					if(currChar == '\\') {
 						this.state = State.ESCAPE;
 					} else if(currChar == ':') {
-						value.append(currChar);
-						this.state = State.METAORTERM;
+						int n2 = 0;
+						char next1 = ' ', next2 = ' ';
+						try {
+							next1 = (char)peekChar();
+							char back = getChar();
+							n2 = (int)back;
+							next2 = (char)peekChar();
+						} catch (IOException e) {
+							value.append(currChar);
+							this.state = State.TERM;
+							break;
+						}
+						if(next1 == ':' && next2 == '=') {
+							int ascii = (int)next1;
+							int ascii2 = this.peekedNotRead.removeLast();
+							this.peekedNotRead.add(n2);
+							this.peekedNotRead.add(ascii);
+							this.peekedNotRead.add(ascii2);
+							return new Token(TokenType.TERMINAL, value.toString());
+						} else {
+							value.append(currChar);
+							this.state = State.TERM;
+						}
 					} else if(currChar == '<' || currChar == '>' || currChar == '|' || currChar == '[' || currChar == ']' || currChar == '{' || currChar == '}' || currChar == '.') {
 						this.state = State.FINISHED;
 						int ascii = (int)currChar;
 						this.peekedNotRead.add(ascii);
 						return new Token(TokenType.TERMINAL, value.toString());
+					} else {
+						value.append(currChar);
 					}
 					break;
 				case ESCAPE:
@@ -148,7 +175,21 @@ public class BnfTokenizer implements Iterator<Token> {
 					break;
 				case ESCAPEDEF:
 					if(currChar == ':') {
-						value.append(currChar);
+						char c = ' ';
+						try {
+							c = (char) peekChar();
+						} catch (IOException e) {
+							this.state = State.TERM;
+							value.append(currChar);
+						}
+						if(c == '=') {
+							this.state = State.TERM;
+							value.append(currChar);
+						} else {
+							int ascii = (int) currChar;
+							this.peekedNotRead.add(ascii);
+							return new Token(TokenType.TERMINAL, value.toString());
+						}
 						this.state = State.ESCAPEDEF2;
 					} else {
 						value.append(currChar);
@@ -158,8 +199,7 @@ public class BnfTokenizer implements Iterator<Token> {
 				case ESCAPEDEF2:
 					if(currChar == '=') {
 						value.append(currChar);
-						this.state = State.FINISHED;
-						return new Token(TokenType.METASYMBOL, value.toString());
+						this.state = State.TERM;
 					} else {
 						value.append(currChar);
 						this.state = State.TERM;

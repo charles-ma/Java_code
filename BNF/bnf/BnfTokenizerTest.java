@@ -28,15 +28,11 @@ public class BnfTokenizerTest {
 		new BnfTokenizer(null);
 	}
 
-	@Test
+	@Test(expected=UnsupportedOperationException.class)
 	public void testHasNext() {
 		assertTrue(this.tokenizer.hasNext());
-		for(int i = 0; i < 300; i++) {
-			try {
-				this.tokenizer.getChar();
-			} catch (IOException e) {
-				System.err.println(e.toString());
-			}
+		for(int i = 0; i < 53; i++) {
+			this.tokenizer.next();
 		}
 		assertFalse(this.tokenizer.hasNext());
 	}
@@ -49,6 +45,14 @@ public class BnfTokenizerTest {
 	@Test(expected=UnsupportedOperationException.class)
 	public void testBack() {
 		this.tokenizer.back();
+		this.tokenizer.next();
+		this.tokenizer.back();
+		assertEquals("<BNF>", this.tokenizer.next().getValue());
+		this.tokenizer.next();
+		assertEquals("{", this.tokenizer.next());
+		this.tokenizer.back();
+		assertEquals("{", this.tokenizer.next());
+		
 	}
 
 	@Test
@@ -62,12 +66,12 @@ public class BnfTokenizerTest {
 			assertEquals('B', this.tokenizer.getChar());
 			assertFalse('B'== this.tokenizer.peekChar());
 		} catch (IOException e) {
-			System.err.println("ioexception");
+			//System.err.println("ioexception");
 		}
 		try {
 			this.reader.close();
 		} catch (IOException e) {
-			System.err.println("Can't close the stream.");
+			//System.err.println("Can't close the stream.");
 		}
 	}
 	
@@ -83,27 +87,32 @@ public class BnfTokenizerTest {
 			assertFalse('>' == this.tokenizer.getChar());
 			assertEquals('>', this.tokenizer.getChar());
 		} catch (IOException e) {
-			System.err.println("ioexception");
+			//System.err.println("ioexception");
 		}
 		for(int i = 0; i < 300; i++) {
 			try {
 				this.tokenizer.getChar();
 			} catch (IOException e) {
-				System.err.println(e.toString());
+				//System.err.println(e.toString());
 			}
 		}
 		try {
 			assertEquals(-1, this.tokenizer.peekChar());
 			this.reader.close();
 		} catch (IOException e) {
-			System.err.println("Can't close the stream.");
+			//System.err.println("Can't close the stream.");
 		}
 	}
 	
+	/**
+	 * I think it will be more clear to print all the tokens out than to write assert statement for each of them
+	 */
 	@Test(expected=UnsupportedOperationException.class)
 	public void testNext() {
-		for(int i = 0; i < 46; i++) {
-			System.out.println(this.tokenizer.next().getValue());
+		for(int i = 0; i < 53; i++) {
+			Token token = this.tokenizer.next();
+			System.out.println(token.getValue() + " -------> " + token.getType());
 		}
+		assertFalse(this.tokenizer.hasNext());
 	}
 }
