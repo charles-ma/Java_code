@@ -1,1 +1,0 @@
-javac Timings.java
