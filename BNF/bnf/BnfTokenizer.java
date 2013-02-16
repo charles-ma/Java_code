@@ -112,7 +112,7 @@ public class BnfTokenizer implements Iterator<Token> {
 						this.state = State.FINISHED;
 						value.append(currChar);
 						return new Token(TokenType.NONTERMINAL, value.toString());
-					} else if(currChar == '<') {
+					} else if(currChar == '<' || currChar == '\n') {
 						this.state = State.ERROR;
 						value.append(currChar);
 					} else {
@@ -206,7 +206,7 @@ public class BnfTokenizer implements Iterator<Token> {
 					}
 					break;
 				case ERROR:
-					throw new RuntimeException("Symentic fault!");
+					throw new RuntimeException("Syntax fault!");
 				case FINISHED:
 					break;
 			}
