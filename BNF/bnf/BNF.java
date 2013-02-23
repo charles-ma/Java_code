@@ -3,6 +3,8 @@
  */
 package bnf;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class BNF {
 	 */
 	public void read(Reader reader) {
 		tokenizer = new BnfTokenizer(reader);
+		parseBnf();
 	}
 	
 	/**
@@ -31,22 +34,66 @@ public class BNF {
 	 * @param writer the stream to be written out to
 	 */
 	public void write(Writer writer) {
-		parseBnf();
-		for(Token t : rules.keySet()) {
-			System.out.println(t.getValue());
-			rules.get(t).print();
-			System.out.println("++++++++++++");
+		if(tokenizer == null) throw new RuntimeException("Yon haven't read in any rules yet!");
+		if(writer == null) throw new IllegalArgumentException("Writer can't be null!");
+		for(Token key : rules.keySet()) {
+			try {
+				writer.append(key.getValue() + "::=" + rule2String(rules.get(key)) + ".\n");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		//for(Token t : rules.keySet()) {
-			//rules.get(t).print();
-		//}
+		try {
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
+	/**
+	 * Looks up the corresponding rule of a String 
+	 * @param nonterminal the rule name
+	 * @return a Tree<Token> represent the rule
+	 */
 	public Tree<Token> lookUp(String nonterminal) {
+		if(nonterminal == null) return null;
+		if(nonterminal.charAt(0) != '<') nonterminal = "<" + nonterminal + ">";
+		for(Token key : rules.keySet()) {
+			if(key.getValue().equals(nonterminal)) return rules.get(key);
+		}
 		return null;
 	}
 	
+	/**
+	 * Gets the String represent the grammar
+	 * @return representing String
+	 */
+	private String rule2String(Tree<Token> rule) {
+		Token node = rule.getValue();
+		StringBuffer buffer = new StringBuffer();
+		ArrayList<Tree<Token>> subtrees = rule.getChildren();
+		for(int i = subtrees.size() - 1; i >= 0; i--) {
+			Tree<Token> subtree = subtrees.get(i);
+			if(node.getType() == Token.TokenType.SEQUENCE) {
+				buffer.append(rule2String(subtree));
+			} else if(node.getType() == Token.TokenType.ANYNUM) {
+				buffer.append("{" + rule2String(subtree) + "}");
+			} else if(node.getType() == Token.TokenType.OPTION) {
+				buffer.append("[" + rule2String(subtree) + "]");
+			} else if(node.getType() == Token.TokenType.OR) {
+				if(i != 0) buffer.append(rule2String(subtree) + "|");
+				else buffer.append(rule2String(subtree));
+			} else {
+				
+			}
+		}
+		if(node.getType() == Token.TokenType.NONTERMINAL || node.getType() == Token.TokenType.TERMINAL) {
+			buffer.append(node.getValue());
+		}
+		return buffer.toString();
+	}
+		
 	/**
 	 * Parse the bnf read in
 	 * @return true if succeed
@@ -253,11 +300,23 @@ public class BNF {
 			return value;
 		}
 		
+		/**
+		 * Prints out the tree
+		 */
 		public void print() {
 			System.out.println(value.toString());
 			for(Tree<T> child : children) {
 				child.print();
 			}
 		}
+		
+		/**
+		 * Gets all the children of a tree node
+		 * @return an ArrayList containing all the children
+		 */
+		public ArrayList<Tree<T>> getChildren() {
+			return children;
+		}
+		
 	} 
 }

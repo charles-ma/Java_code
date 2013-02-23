@@ -1,10 +1,10 @@
-<program> ::= {<line>;}.
+<program> ::= {<line>;\n}.
 <line> ::= <readFile> | <writeFile> | <deleteFile> | <createFile>.
 <readFile> ::= read <fileName>.
 <writeFile> ::= write <fileName> [<override>].
 <deleteFile> ::= delete <fileName>.
 <createFile> ::= create <fileName> [<permission>].
-<fileName> ::= a | b | c | d | e.
-<override> ::= Y | N.
+<fileName> ::= a|b|c|d|e.
+<override> ::= Y|N.
 <permission> ::= <Num><Num><Num>.
-<Num> ::= 0 | 1.
+<Num> ::= 0|1.
