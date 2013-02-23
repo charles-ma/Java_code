@@ -1,4 +1,4 @@
-<program> ::= {<line>;\n}.
+<program> ::= {<line>;}.
 <line> ::= <readFile> | <writeFile> | <deleteFile> | <createFile>.
 <readFile> ::= read <fileName>.
 <writeFile> ::= write <fileName> [<override>].
