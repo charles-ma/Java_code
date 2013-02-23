@@ -61,7 +61,7 @@ public class BnfTokenizer implements Iterator<Token> {
 				currChar = getChar();				
 			} catch (IOException e) {
 				if(this.state == State.TERM || this.state == State.ESCAPEDEF2 || this.state == State.ESCAPEDEF || this.state == State.METAORTERM2 || this.state == State.METAORTERM) {
-					return new Token(TokenType.TERMINAL, value.toString());
+					return this.preToken = new Token(TokenType.TERMINAL, value.toString());
 				} else {
 					throw new UnsupportedOperationException("Don't have any tokens left!");
 				}
@@ -74,7 +74,7 @@ public class BnfTokenizer implements Iterator<Token> {
 					} else if(currChar == '|' || currChar == '[' || currChar == ']' || currChar == '{' || currChar == '}' || currChar == '.') {
 						this.state = State.META;
 						value.append(currChar);
-						return new Token(TokenType.METASYMBOL, value.toString());
+						return this.preToken = new Token(TokenType.METASYMBOL, value.toString());
 					} else if(currChar == ':') {
 						this.state = State.METAORTERM;
 						value.append(currChar);
@@ -101,7 +101,7 @@ public class BnfTokenizer implements Iterator<Token> {
 					if(currChar == '=') {
 						this.state = State.FINISHED;
 						value.append(currChar);
-						return new Token(TokenType.METASYMBOL, value.toString());
+						return this.preToken = new Token(TokenType.METASYMBOL, value.toString());
 					} else {
 						this.state = State.TERM;
 						value.append(currChar);
@@ -111,7 +111,7 @@ public class BnfTokenizer implements Iterator<Token> {
 					if(currChar == '>') {
 						this.state = State.FINISHED;
 						value.append(currChar);
-						return new Token(TokenType.NONTERMINAL, value.toString());
+						return this.preToken = new Token(TokenType.NONTERMINAL, value.toString());
 					} else if(currChar == '<' || currChar == '\n') {
 						this.state = State.ERROR;
 						value.append(currChar);
@@ -141,7 +141,7 @@ public class BnfTokenizer implements Iterator<Token> {
 							this.peekedNotRead.add(n2);
 							this.peekedNotRead.add(ascii);
 							this.peekedNotRead.add(ascii2);
-							return new Token(TokenType.TERMINAL, value.toString());
+							return this.preToken = new Token(TokenType.TERMINAL, value.toString());
 						} else {
 							value.append(currChar);
 							this.state = State.TERM;
@@ -150,7 +150,7 @@ public class BnfTokenizer implements Iterator<Token> {
 						this.state = State.FINISHED;
 						int ascii = (int)currChar;
 						this.peekedNotRead.add(ascii);
-						return new Token(TokenType.TERMINAL, value.toString());
+						return this.preToken = new Token(TokenType.TERMINAL, value.toString());
 					} else {
 						value.append(currChar);
 					}
@@ -188,7 +188,7 @@ public class BnfTokenizer implements Iterator<Token> {
 						} else {
 							int ascii = (int) currChar;
 							this.peekedNotRead.add(ascii);
-							return new Token(TokenType.TERMINAL, value.toString());
+							return this.preToken = new Token(TokenType.TERMINAL, value.toString());
 						}
 						this.state = State.ESCAPEDEF2;
 					} else {

@@ -40,4 +40,7 @@ public class Token {
 		return this.value;
 	}
 	
+	public String toString() {
+		return this.value;
+	}
 }
