@@ -3,6 +3,8 @@
  */
 package funl;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.Stack;
 
@@ -15,6 +17,14 @@ public class Parser {
 	private Tokenizer tokenizer = null;
 	private Stack<Tree<Token>> stack = null;
 	
+	public static void main(String[] args) {
+		try {
+			new Parser(new FileReader("./funl/sample")).parseFunl();
+		} catch (IOException e) {
+			System.out.println("file!");
+		}
+	}
+	
 	public Parser(Reader reader) {
 		tokenizer = new Tokenizer(reader);
 		stack = new Stack<Tree<Token>>();
@@ -22,7 +32,12 @@ public class Parser {
 	
 	public boolean parseFunl() {
 		while(tokenizer.next().getType() != TokenType.EOI) {
+			tokenizer.pushBack();
 			parseFunDef();
+		}
+		for(int i = 0; i < stack.size(); i++) {
+			stack.get(i).print();
+			//System.out.println(i);
 		}
 		return true;
 	}
@@ -36,8 +51,10 @@ public class Parser {
 			next = tokenizer.next();
 			Tree<Token> paras = new Tree<Token>(new Token(TokenType.NAME, "$seq"));
 			while(next.getType() != TokenType.SYMBOL || !next.getValue().equals("=")) {
+				tokenizer.pushBack();
 				parsePara();
 				paras.addChild(stack.pop());				
+				next = tokenizer.next();
 			}
 			tree.addChild(paras);
 			parseExps();
@@ -74,7 +91,8 @@ public class Parser {
 			parseExp();
 			tree.addChild(stack.pop());
 			next = tokenizer.next();
-		} while(next.getType() != TokenType.SYMBOL || !next.getValue().equals(","));
+		} while(next.getType() == TokenType.SYMBOL && next.getValue().equals(","));
+		stack.push(tree);
 		tokenizer.pushBack();
 		return true;
 	}
@@ -85,6 +103,7 @@ public class Parser {
 			tokenizer.pushBack();
 			parseValDef();
 		} else {
+			tokenizer.pushBack();
 			parseTerm();
 			while(parseAdd()) {
 				parseTerm();
@@ -94,6 +113,7 @@ public class Parser {
 				tree.addChild(sub);
 				stack.push(tree);
 			}
+			tokenizer.pushBack();
 		}
 		return true;
 	}
@@ -126,6 +146,7 @@ public class Parser {
 			tree.addChild(sub);
 			stack.push(tree);
 		}
+		tokenizer.pushBack();
 		return true;
 	}
 	
@@ -135,7 +156,7 @@ public class Parser {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
 		} else {
-			throw new RuntimeException("Failed parsing add operation!");
+			return false;
 		}
 		return true;
 	}
@@ -150,15 +171,20 @@ public class Parser {
 				next = tokenizer.next();
 				Tree<Token> tree = new Tree<Token>(new Token(TokenType.NAME, "$call"));
 				if(next.getType() == TokenType.SYMBOL && next.getValue().equals(")")) {
-					parseExps();
+					//tokenizer.pushBack();
+					stack.push(new Tree<Token>(new Token(TokenType.NAME, "")));
 				} else {
 					tokenizer.pushBack();
-					stack.push(new Tree<Token>(new Token(TokenType.NAME, "")));
+					parseExps();
+					next = tokenizer.next();
+					if(next.getType() != TokenType.SYMBOL || !next.getValue().equals(")")) throw new RuntimeException("Failed parsing ) !");
 				}
 				Tree<Token> sub = stack.pop();
 				tree.addChild(stack.pop());
 				tree.addChild(sub);
 				stack.push(tree);
+			} else {
+				tokenizer.pushBack();
 			}
 		} else if(next.getType() == TokenType.KEYWORD) {
 			if(next.getValue().equals("if")) {
@@ -212,7 +238,7 @@ public class Parser {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
 		} else {
-			throw new RuntimeException("Failed parsing add operation!");
+			return false;
 		}
 		return true;
 	}

@@ -81,8 +81,10 @@ public class Tokenizer {
                     break;
                     
                 //added by charles 17th, Mar    
-                case '\'':
+                case '\"':
+                	tokenizer.nextToken();
                 	lastToken = new Token(TokenType.STRING, tokenizer.sval);
+                	tokenizer.nextToken();
                 	break;
                 
                 default:
