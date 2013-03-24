@@ -1,7 +1,7 @@
 /**
  * Tokenizer for CIT594, Spring 2010.
  */
-package funl;
+package evaluator;
 
 /**
  * @author David Matuszek

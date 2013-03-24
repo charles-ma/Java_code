@@ -1,7 +1,7 @@
 /**
  * 
  */
-package funl;
+package evaluator;
 
 /**
  * @author David Matuszek

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package funl;
+package evaluator;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Parser {
 	
 	public static void main(String[] args) {
 		try {
-			new Parser(new FileReader("./funl/sample")).parseFunl();
+			new Parser(new FileReader("./evaluator/sample")).parseFunl();
 		} catch (IOException e) {
 			System.out.println("file!");
 		}
@@ -33,17 +33,23 @@ public class Parser {
 	public boolean parseFunl() {
 		while(tokenizer.next().getType() != TokenType.EOI) {
 			tokenizer.pushBack();
-			parseFunDef();
+			if(tokenizer.next().getType() != TokenType.EOL) {
+				tokenizer.pushBack();
+				parseFunDef();
+			}
 		}
-		for(int i = 0; i < stack.size(); i++) {
+		/*for(int i = 0; i < stack.size(); i++) {
 			stack.get(i).print();
 			//System.out.println(i);
-		}
+		}*/
 		return true;
 	}
 	
 	public boolean parseFunDef() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.KEYWORD && next.getValue().equals("def")) {
 			Tree<Token> tree = new Tree<Token>(next);
 			parseName();
@@ -70,6 +76,9 @@ public class Parser {
 		
 	public boolean parseName() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.NAME) {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
@@ -91,6 +100,9 @@ public class Parser {
 			parseExp();
 			tree.addChild(stack.pop());
 			next = tokenizer.next();
+			while(next.getType() == TokenType.EOL) {
+				next = tokenizer.next();
+			}
 		} while(next.getType() == TokenType.SYMBOL && next.getValue().equals(","));
 		stack.push(tree);
 		tokenizer.pushBack();
@@ -99,6 +111,9 @@ public class Parser {
 	
 	public boolean parseExp() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.KEYWORD && next.getValue().equals("val")) {
 			tokenizer.pushBack();
 			parseValDef();
@@ -120,6 +135,9 @@ public class Parser {
 	
 	public boolean parseValDef() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.KEYWORD && next.getValue().equals("val")) {
 			Tree<Token> tree = new Tree<Token>(next);
 			parseName();
@@ -152,6 +170,9 @@ public class Parser {
 	
 	public boolean parseAdd() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.SYMBOL && (next.getValue().equals("+") || next.getValue().equals("-"))) {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
@@ -163,6 +184,9 @@ public class Parser {
 	
 	public boolean parseFactor() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.NAME) {
 			tokenizer.pushBack();
 			parseName();
@@ -234,6 +258,9 @@ public class Parser {
 	
 	public boolean parseMul() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.SYMBOL && (next.getValue().equals("*") || next.getValue().equals("/"))) {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
@@ -245,6 +272,9 @@ public class Parser {
 	
 	public boolean parseQuoteString() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.STRING) {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
@@ -256,6 +286,9 @@ public class Parser {
 	
 	public boolean parseNum() {
 		Token next = tokenizer.next();
+		while(next.getType() == TokenType.EOL) {
+			next = tokenizer.next();
+		}
 		if(next.getType() == TokenType.NUMBER) {
 			Tree<Token> tree = new Tree<Token>(next);
 			stack.push(tree);
@@ -263,5 +296,9 @@ public class Parser {
 			throw new RuntimeException("Failed parsing number!");
 		}
 		return true;
+	}
+	
+	public Stack<Tree<Token>> getStack() {
+		return stack;
 	}
 }

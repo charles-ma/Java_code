@@ -1,4 +1,4 @@
-package funl;
+package evaluator;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -32,6 +32,7 @@ public class Tokenizer {
         tokenizer.ordinaryChars(':', '@');
         tokenizer.ordinaryChars('[', '`');
         tokenizer.ordinaryChars('{', (char) 127);
+        tokenizer.quoteChar('\"');
         tokenizer.wordChars('_', '_');
         tokenizer.slashSlashComments(true);
         tokenizer.slashStarComments(true);
@@ -82,9 +83,9 @@ public class Tokenizer {
                     
                 //added by charles 17th, Mar    
                 case '\"':
-                	tokenizer.nextToken();
+                	//tokenizer.nextToken();
                 	lastToken = new Token(TokenType.STRING, tokenizer.sval);
-                	tokenizer.nextToken();
+                	//tokenizer.nextToken();
                 	break;
                 
                 default:
