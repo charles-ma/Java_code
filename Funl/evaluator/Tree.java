@@ -21,6 +21,17 @@ public class Tree<T> {
 	public Tree(T value) {
 		this.value = value;
 	}
+		
+	/**
+	 * Make a deep copy of a tree
+	 * @param tree the tree to be copied
+	 */
+	public Tree(Tree<T> tree) {
+		value = tree.value;
+		for(int i = 0; i < tree.children.size(); i++) {
+			children.add(new Tree<T>(tree.children.get(i)));
+		}
+	}
 	
 	/**
 	 * Adds a child node to the tree
@@ -56,4 +67,14 @@ public class Tree<T> {
 		return children;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Tree)) return false;
+		Tree<T> other = (Tree<T>) o;
+		if(!value.equals(other.value)) return false;
+		for(int i = 0; i < children.size(); i++) {
+			if(!children.get(i).equals(other.children.get(i))) return false;
+		}
+		return true;
+	}
 } 

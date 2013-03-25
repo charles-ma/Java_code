@@ -25,11 +25,19 @@ public class Parser {
 		}
 	}
 	
+	/**
+	 * Constructor
+	 * @param reader input
+	 */
 	public Parser(Reader reader) {
 		tokenizer = new Tokenizer(reader);
 		stack = new Stack<Tree<Token>>();
 	}
 	
+	/**
+	 * Parse funl
+	 * @return true if succeed
+	 */
 	public boolean parseFunl() {
 		while(tokenizer.next().getType() != TokenType.EOI) {
 			tokenizer.pushBack();
@@ -38,13 +46,13 @@ public class Parser {
 				parseFunDef();
 			}
 		}
-		/*for(int i = 0; i < stack.size(); i++) {
-			stack.get(i).print();
-			//System.out.println(i);
-		}*/
 		return true;
 	}
 	
+	/**
+	 * Parse function definitions
+	 * @return true if succeed
+	 */
 	public boolean parseFunDef() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -74,6 +82,10 @@ public class Parser {
 		return true;
 	}
 		
+	/**
+	 * Parse name
+	 * @return true if succeed
+	 */
 	public boolean parseName() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -88,11 +100,19 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse parameters
+	 * @return true if succeed
+	 */
 	public boolean parsePara() {
 		parseName();
 		return true;		
 	}
 	
+	/**
+	 * Parse expressions
+	 * @return true if succeed
+	 */
 	public boolean parseExps() {
 		Token next = null;
 		Tree<Token> tree = new Tree<Token>(new Token(TokenType.NAME, "$seq"));
@@ -109,6 +129,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse expression
+	 * @return true if succeed
+	 */
 	public boolean parseExp() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -133,6 +157,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse variable definition
+	 * @return true if succeed
+	 */
 	public boolean parseValDef() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -154,6 +182,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse term
+	 * @return true if succeed
+	 */
 	public boolean parseTerm() {
 		parseFactor();
 		while(parseMul()) {
@@ -168,6 +200,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse +
+	 * @return true if succeed
+	 */
 	public boolean parseAdd() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -182,6 +218,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse factors
+	 * @return true if succeed
+	 */
 	public boolean parseFactor() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -256,6 +296,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse *
+	 * @return true if succeed
+	 */
 	public boolean parseMul() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -270,6 +314,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse quote string
+	 * @return true if succeed
+	 */
 	public boolean parseQuoteString() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -284,6 +332,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Parse number
+	 * @return true if succeed
+	 */
 	public boolean parseNum() {
 		Token next = tokenizer.next();
 		while(next.getType() == TokenType.EOL) {
@@ -298,6 +350,10 @@ public class Parser {
 		return true;
 	}
 	
+	/**
+	 * Get the stack
+	 * @return the stack
+	 */
 	public Stack<Tree<Token>> getStack() {
 		return stack;
 	}
