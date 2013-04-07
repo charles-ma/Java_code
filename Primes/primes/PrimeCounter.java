@@ -24,7 +24,7 @@ public class PrimeCounter {
 		System.out.println("My computer has 4 cores;");
 		System.out.println("Current computer has " + Runtime.getRuntime().availableProcessors() + " cores;");
 		System.out.println("---------------------------------------------");
-		for (int limit = 1000; limit < 100000000; limit *= 10) {
+		for (int limit = 1000; limit <= 10000000; limit *= 10) {
 			long start = System.nanoTime();
 			int n = pc.startCount(1, limit);
             long finish = System.nanoTime();
