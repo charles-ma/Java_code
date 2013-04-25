@@ -1,8 +1,8 @@
 /**
- * Contains the UDP chatting server
+ * Contains RSAKeyGenerator, Key, KeyPair, Cipher
  */
 /**
  * @author machao & Ziwei Song
  * @version 1.0
  */
-package server;
+package rsa;

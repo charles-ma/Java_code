@@ -7,9 +7,11 @@ import java.io.*;
 import java.net.*;
 import java.util.Arrays;
 
+import rsa.Key;
+
 /**
  * UDP chatting client
- * @author machao
+ * @author machao & Ziwei Song
  * @version 1.0
  */
 public class UDPClient {
@@ -19,7 +21,10 @@ public class UDPClient {
 	private DatagramSocket clientSocket= new DatagramSocket();
 	private byte[] receiveData = new byte[1024];
 	private byte[] sendData = new byte[1024];
-	
+	private rsa.Cipher cipher = new rsa.Cipher(); 
+	private rsa.Key pubKey = new rsa.Key(193, 4891);
+	private rsa.Key priKey = new rsa.Key(3841, 4891);
+		
 	/**
 	 * Main function for client
 	 * @param args first parameter is the server name, second is the server port
@@ -94,7 +99,7 @@ public class UDPClient {
 					return;
 				}
 				String response = new String(receivePacket.getData());
-				System.out.println("Other: " + response);
+				System.out.println("Other: " + cipher.decrypt(response, priKey));
 			}
 		}
 		
@@ -119,6 +124,7 @@ public class UDPClient {
 			}
 			while(!userInput.equals(".bye")) {
 				Arrays.fill(sendData, (byte)0);
+				userInput = cipher.encrypt(userInput, pubKey);
 				sendData = userInput.getBytes();
 				DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, ip, port);
 				try {

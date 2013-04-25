@@ -1,0 +1,26 @@
+Author: Chao Ma & Ziwei Song
+
+Before the execution, compile the *.java code first
+
+1. UDPServer
+The UDPServer is contained in the server package.  To launch the program, type java server.UDPServer under the directory of RSAChat, this server may accept one parameter which indicate the port to use. Such as java server.UDPServer 8100. The default port is 8000. The built-in private key is (193, 4891), public key is (3841, 4891). Type .bye to end the chat with client.
+
+2. UDPClient
+The UDPClient is contained in the client package. To launch the program, type java client.UDPClient under the directory of RSAChat, this client may accept two parameters indicating the server name(or ip) and the port number of the server. The default server is 127.0.0.1(local host), default port is 8000. The built-in private key is (193, 4891), public key is (3841, 4891). Type .bye to end the chat with server.
+The chat should be started by the client.(You have to first type from the client to active the host)
+
+3. RSAKeyGenerator
+After launching the program, you will be asked to type in two indices of the prime number and then it will generate a rsakey
+
+4. Cipher
+The Cipher is responsible for encrypting and decrypting strings. You will be asked to enter the public key, input a string to encrypt, shown the result and asked again to type in private key, input a string to decrypt and shown the result again.
+
+5. KeyCracker
+The KeyCracker is used to crack a key. You will be asked to input the key value and the c value of the public key, and then shown the result, asked again to type in a string to decrypt, shown the result again.
+
+6. Github
+https://github.com/charles-ma/Java_code/tree/master/RSAChat
+
+7. Sample run can be found in the folder './samplerun'. Doc can be found in the folder './doc'
+
+8. The whole project is written in Java, without testing, the communication with C/C++ clients/servers is not garanteed
